@@ -1,0 +1,60 @@
+.select {
+  height: 40px !important;
+  position: relative;
+
+  &:hover {
+    .selectClear {
+      opacity: 1;
+    }
+  }
+  .selectClear {
+    position: absolute;
+    top: 10px;
+    right: 4px;
+    opacity: 0;
+    transition: 0.3s;
+  }
+}
+.textArea {
+  height: initial !important;
+  padding: 8px;
+  outline: none;
+}
+.formControl {
+  display: flex !important;
+  gap: 10px;
+}
+.radioBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 0;
+}
+.label {
+  font-size: 12px;
+  color: var(--black);
+}
+.inputBox {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 12px;
+  padding: 7px 8px;
+  outline: none;
+  height: 35px;
+}
+.primary {
+  box-shadow: 0px 2px 2px 0px #00000040;
+  background-color: #eff2f7;
+}
+.white {
+  background-color: var(--white);
+  border: 1px solid var(--tgGray);
+  border-radius: 10px;
+}
+.activeBtn {
+  background-color: var(--white) !important;
+}
+.phoneInput {
+  border: none !important;
+}
