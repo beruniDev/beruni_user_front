@@ -18,12 +18,13 @@
   min-width: 260px;
   z-index: 200;
   transition: 0.3s all ease-in-out;
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  min-height: 100lvh;
-  overflow-y: scroll;
+  border-right: 1px solid black;
+  // position: fixed;
+  // left: 0;
+  // top: 0;
+  // bottom: 0;
+  // min-height: 100lvh;
+
   padding-right: 10px;
   height: 100%;
   margin-right: 15px;
@@ -32,78 +33,11 @@
   justify-content: space-between;
   flex-direction: column;
   padding-bottom: 20px;
-
-  // @media (max-width: 1200px) {
-  //   width: 0;
-  //   min-width: 0;
-  // }
   li {
     z-index: 10;
   }
-  // &:hover {
-  //   @media (min-width: 1200px) {
-  //     width: 260px;
-  //     min-width: 260px;
-  //   }
-  //   .menuText {
-  //     opacity: 1;
-  //     display: flex;
-  //   }
-
-  //   .menuItem,
-  //   .submenu,
-  //   .arrow {
-  //     opacity: 1;
-  //   }
-
-  //   .title,
-  //   .subTitle {
-  //     opacity: 1;
-  //   }
-  // }
 }
 
-// .collapsed {
-//   width: 260px;
-//   min-width: 260px;
-
-//   .title,
-//   .subTitle,
-//   .arrow {
-//     opacity: 1;
-//   }
-//   .content {
-//     opacity: 1;
-//     transform: translate3d(0px, 0, 0);
-//   }
-// }
-// .title,
-// .subTitle {
-//   opacity: 0;
-// }
-
-// .title {
-//   transition: 0.2s;
-//   width: 260px;
-//   padding: 12px 0 0 20px;
-//   cursor: pointer;
-//   font-family: "Bruno Ace SC" !important;
-//   font-size: 28px;
-// }
-// .subTitle {
-//   font-size: 14px;
-//   overflow: hidden;
-//   text-overflow: initial;
-//   white-space: nowrap;
-// }
-// .overlay {
-//   z-index: 110;
-//   position: fixed;
-//   top: 0;
-//   bottom: 0;
-//   left: 0;
-//   right: 0;
-// }
 .logo {
   position: relative;
   display: flex;
@@ -128,31 +62,13 @@
   }
 }
 
-.subMenuItem {
-  display: flex;
-  flex: 1;
-  opacity: 0;
-  transition: 0.3s;
-}
-
-.submenu {
-  background-color: rgba(0, 0, 0, 0.15);
-  display: flex;
-  padding: 5px;
-  flex-direction: column;
-  border-radius: 16px;
-
-  .link {
-    margin-right: 0 !important;
-  }
-}
 .link {
   display: flex;
   flex: 4;
   align-items: center;
   color: #ffffff;
   opacity: 0.86;
-  padding: 10px 15px;
+  padding: 5px 15px;
   cursor: pointer;
   margin: 4px 0;
   border-radius: 16px;

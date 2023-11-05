@@ -9,20 +9,25 @@ interface Props extends PropsWithChildren {
 
 const Card: FC<Props> = ({ children, className, title }) => {
   return (
-    <>
-      <div
-        className={cl("bg-white rounded-2xl w-full mb-4 mt-4 pb-4 ", className)}
-      >
-        <div className="flex justify-between ">
-          {title && (
+    <div
+      className={cl(
+        "bg-gray-100 rounded-2xl w-full mb-4 mt-2 pb-4 border border-black",
+        className
+      )}
+    >
+      <div className="flex justify-between ">
+        {title && (
+          <div className="">
             <Typography className="flex" size={TextSize.XXL}>
               {title}
             </Typography>
-          )}
-        </div>
-        {children}
+
+            <div className="w-full h-[2px] bg-orange-400 mt-4" />
+          </div>
+        )}
       </div>
-    </>
+      {children}
+    </div>
   );
 };
 

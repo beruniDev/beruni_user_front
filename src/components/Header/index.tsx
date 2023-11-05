@@ -1,19 +1,7 @@
-import { FC, PropsWithChildren } from "react";
-import Typography, { TextSize } from "../Typography";
-
-interface Props extends PropsWithChildren {
-  title?: string;
-  subTitle?: string;
-}
-
-const Header: FC<Props> = ({ children, title }) => {
+const Header = () => {
   return (
-    <div className="flex items-center justify-between w-full px-8 py-4">
-      <Typography className="flex" size={TextSize.XXL}>
-        {title}
-      </Typography>
-
-      {children}
+    <div className="w-full rounded-2xl border border-black bg-gray-100 h-44">
+      <img src="/assets/images/logo.png" alt="logo-image" className="h-44" />
     </div>
   );
 };
