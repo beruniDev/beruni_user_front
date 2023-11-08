@@ -4,13 +4,20 @@ import Container from "./components/Container";
 import Sidebar from "./components/Sidebar";
 import Card from "./components/Card";
 import Footer from "./components/Footer";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
-  console.log("first");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.location.pathname === "/") navigate("/main");
+  }, []);
+
   return (
-    <Container>
+    <Container className="relative flex flex-col h-[100vh]">
       <Header />
-      <Card className="flex p-4 h-[70vh]">
+      <Card className="flex p-4 h-[75vh]">
         <Sidebar />
         <Navigations />
       </Card>

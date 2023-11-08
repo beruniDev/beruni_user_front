@@ -14,7 +14,7 @@ const routes = [
   },
   {
     name: "Search by tome",
-    url: "/search-tome",
+    url: "/tome-search",
   },
   {
     name: "Detailed search",
