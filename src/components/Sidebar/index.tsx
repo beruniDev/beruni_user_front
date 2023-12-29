@@ -2,54 +2,97 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./index.module.scss";
 import cl from "classnames";
 import { Fragment } from "react";
+import { useAppDispatch, useAppSelector } from "src/store/utils/types";
+import { logoutHandler, tokenSelector } from "src/store/reducers/auth";
 
 const routes = [
   {
     name: "Main",
-    url: "/main",
+    url: "/users/main",
   },
   {
     name: "Search",
-    url: "/search",
+    url: "/users/search",
   },
   {
     name: "Search by tome",
-    url: "/tome-search",
+    url: "/users/tome-search",
   },
   {
     name: "Detailed search",
-    url: "/detailed-search",
+    url: "/users/detailed-search",
+  },
+];
+
+const adminRoutes = [
+  {
+    name: "Add",
+    url: "/admin/add",
+  },
+  {
+    name: "Change",
+    url: "/admin/change",
+  },
+  {
+    name: "On basis of",
+    url: "/admin/on-basis-of",
+  },
+  {
+    name: "Filter",
+    url: "/admin/filter",
   },
 ];
 
 const Sidebar = () => {
   const { pathname } = useLocation();
+  const token = useAppSelector(tokenSelector);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logoutHandler());
+    navigate("/user/main");
+  };
 
   return (
-    <div className={cl(styles.sidebar, styles.block)}>
+    <div className={cl(styles.sidebar)}>
       <ul className={styles.mainList}>
-        {routes.map((route) => {
+        {(!!token ? adminRoutes : routes).map((route) => {
           return (
             <Fragment key={route.url + route.name}>
               <li className={cl("nav-item")}>
                 <Link
-                  className={cl(
-                    "nav-link d-flex align-items-center",
-                    styles.link,
-                    {
-                      [styles.active]: pathname.includes(route.url!),
-                    }
-                  )}
+                  className={cl("text-black flex items-center", styles.link, {
+                    [styles.active]: pathname.includes(route.url!),
+                  })}
                   to={`${route.url}`}
                   state={{ name: route.name }}
                 >
-                  <p className={styles.content}>{route.name}</p>
+                  {route.name}
                 </Link>
               </li>
             </Fragment>
           );
         })}
       </ul>
+
+      <div>
+        {!token ? (
+          <Link
+            className={cl("flex items-center justify-center")}
+            to={"/users/login"}
+          >
+            Login
+          </Link>
+        ) : (
+          <div
+            onClick={handleLogout}
+            className={cl("flex items-center justify-center cursor-pointer")}
+          >
+            Logout
+          </div>
+        )}
+      </div>
     </div>
   );
 };

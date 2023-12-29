@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, HTMLInputTypeAttribute, useRef } from "react";
+import { ChangeEvent, FC, HTMLInputTypeAttribute } from "react";
 import cl from "classnames";
 import { UseFormRegisterReturn } from "react-hook-form";
 import styles from "./index.module.scss";

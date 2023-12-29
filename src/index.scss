@@ -43,3 +43,11 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.bordered {
+  tr {
+    border: 1px solid black;
+  }
+  th {
+    border-right: 1px solid black;
+  }
+}

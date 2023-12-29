@@ -11,7 +11,8 @@ import { queryClient } from "./utils/helpers";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-export const baseURL = "https://api.cakes.safiabakery.uz";
+// export const baseURL = "https://api.cakes.safiabakery.uz";
+export const baseURL = "http://10.0.0.133:8000";
 export default new BaseAPIClient(baseURL, store);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
