@@ -29,7 +29,7 @@ const App = () => {
         <Sidebar />
         <div className="w-full overflow-y-auto">
           <Routes>
-            {!token ? ( //user routes
+            {token ? ( //user routes //todo !
               <Route path="/users">
                 <Route element={<Home />} index path={"main"} />
                 <Route element={<Search />} path={"search"} />

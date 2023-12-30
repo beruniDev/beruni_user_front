@@ -57,7 +57,8 @@ const Sidebar = () => {
   return (
     <div className={cl(styles.sidebar)}>
       <ul className={styles.mainList}>
-        {(!!token ? adminRoutes : routes).map((route) => {
+        {(!token ? adminRoutes : routes).map((route) => {
+          // todo !
           return (
             <Fragment key={route.url + route.name}>
               <li className={cl("nav-item")}>

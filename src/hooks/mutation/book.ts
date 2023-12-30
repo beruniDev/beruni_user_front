@@ -50,7 +50,7 @@ interface bookBody {
 const bookMutation = () => {
   const contentType = "multipart/form-data";
 
-  const config = { timeout: 100000 };
+  const config = { timeout: 1000 }; // todo
   return useMutation({
     mutationKey: ["post_book"],
     mutationFn: async (body: bookBody) => {

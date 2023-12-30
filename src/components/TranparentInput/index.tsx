@@ -24,7 +24,7 @@ const TranparentInput: FC<Props> = ({
   return (
     <div className="w-full min-h-[48px] h-full relative ">
       <textarea
-        className={cl("absolute inset-0", className)}
+        className={cl("absolute inset-0 py-1 px-2", className)}
         placeholder={placeholder || ""}
         ref={ref}
         {...register}
