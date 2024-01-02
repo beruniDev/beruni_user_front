@@ -1,5 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 import { EPresetTimes } from "./types";
+import useQueryString from "src/hooks/useQueryString";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -10,6 +11,8 @@ export const queryClient = new QueryClient({
     },
   },
 });
+
+export const itemsPerPage = 50;
 
 export const bookValues = {
   inventory_number: 1,
@@ -98,4 +101,10 @@ export const inputnames: any = {
   19: "19. Fixation in CBP",
   20: "20. Note",
   21: "21. Author of description",
+};
+
+export const handleIdx = (index: number) => {
+  const currentPage = Number(useQueryString("page")) || 1;
+  if (currentPage === 1) return index + 1;
+  else return index + 1 + itemsPerPage * (currentPage - 1);
 };

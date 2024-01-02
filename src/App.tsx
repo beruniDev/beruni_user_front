@@ -13,6 +13,7 @@ import SearchTome from "src/pages/SearchTome";
 import { useAppSelector } from "./store/utils/types";
 import { tokenSelector } from "./store/reducers/auth";
 import EditAddBook from "./pages/EditAddBook";
+import BookList from "./pages/List";
 
 const App = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const App = () => {
         <Sidebar />
         <div className="w-full overflow-y-auto">
           <Routes>
-            {token ? ( //user routes //todo !
+            {!token ? (
               <Route path="/users">
                 <Route element={<Home />} index path={"main"} />
                 <Route element={<Search />} path={"search"} />
@@ -41,6 +42,8 @@ const App = () => {
               // admin routes
               <Route path={"/admin"}>
                 <Route element={<EditAddBook />} index path={"add"} />
+                <Route element={<EditAddBook />} index path={":id"} />
+                <Route element={<BookList />} index path={"list"} />
               </Route>
             )}
           </Routes>

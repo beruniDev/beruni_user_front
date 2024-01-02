@@ -41,6 +41,10 @@ const adminRoutes = [
     name: "Filter",
     url: "/admin/filter",
   },
+  {
+    name: "List",
+    url: "/admin/list",
+  },
 ];
 
 const Sidebar = () => {
@@ -57,8 +61,7 @@ const Sidebar = () => {
   return (
     <div className={cl(styles.sidebar)}>
       <ul className={styles.mainList}>
-        {(!token ? adminRoutes : routes).map((route) => {
-          // todo !
+        {(token ? adminRoutes : routes).map((route) => {
           return (
             <Fragment key={route.url + route.name}>
               <li className={cl("nav-item")}>
