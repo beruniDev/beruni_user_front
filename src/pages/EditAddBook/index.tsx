@@ -1,7 +1,10 @@
-import { Fragment, useEffect } from "react";
+import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import TranparentInput from "src/components/TranparentInput";
 import bookMutation from "src/hooks/mutation/book";
+import filesMutation from "src/hooks/mutation/files";
+import useBooks from "src/hooks/useBooks";
 import { bookValues, inputnames } from "src/utils/helpers";
 
 const tableArr = [
@@ -29,7 +32,7 @@ const tableArr = [
       { name: "Compiler (name) as in manuscript", id: 8 },
     ],
   },
-  { name: "Date of writing", id: 4 },
+  { name: "Date of writing", id: 4, inputType: "date" },
   { name: "Language", id: 5 },
   { name: "Subject", id: 6 },
   {
@@ -55,7 +58,7 @@ const tableArr = [
     name: "Date, Place of Copying",
     id: 12,
     child: [
-      { name: "Date of Copying", id: 1 },
+      { name: "Date of Copying", id: 1, inputType: "date" },
       { name: "Place of Copying", id: 2 },
     ],
   },
@@ -82,9 +85,17 @@ const tableArr = [
 ];
 
 const EditAddBook = () => {
+  const { id } = useParams();
   const { register, reset, getValues, handleSubmit } = useForm();
+  const [images, $images] = useState<any>();
+
+  const { data } = useBooks({ id, enabled: !!id });
+
+  const book = data?.items?.[0];
 
   const { mutate } = bookMutation();
+
+  const { mutate: fileUpload } = filesMutation();
 
   const onSubmit = () => {
     const body = Object.entries(bookValues)?.reduce((acc: any, item) => {
@@ -96,22 +107,39 @@ const EditAddBook = () => {
       }
       return acc;
     }, {});
+    body.images = images.toString();
 
     mutate(body);
   };
 
-  // useEffect(() => {
-  //   const book: any = {};
-  //   const initialVals = Object.entries(bookValues).reduce((acc: any, item) => {
-  //     acc[item[1]] = book[item[0]];
-  //     return acc;
-  //   }, {});
-  //   reset(initialVals);
-  // }, []);
+  const handleImages = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files!;
+
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
+    fileUpload(formData, {
+      onSuccess: (data) => $images(data.files),
+    });
+  };
+
+  useEffect(() => {
+    if (book) {
+      const initialVals = Object.entries(bookValues).reduce(
+        (acc: any, item) => {
+          //@ts-ignore
+          acc[item[1]] = book[item[0]];
+          return acc;
+        },
+        {}
+      );
+      reset(initialVals);
+    }
+  }, [book]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <button type="submit">save</button>
       <table className="bordered w-full">
         <tbody>
           {tableArr.map((item) => {
@@ -120,7 +148,10 @@ const EditAddBook = () => {
                 <tr key={item.id}>
                   <th colSpan={2}>{inputnames[`${item.id}`]}</th>
                   <td colSpan={3}>
-                    <TranparentInput register={register(`${item.id}`)} />
+                    <TranparentInput
+                      register={register(`${item.id}`)}
+                      type={item?.inputType}
+                    />
                   </td>
                 </tr>
               );
@@ -138,6 +169,7 @@ const EditAddBook = () => {
 
                     <td colSpan={3}>
                       <TranparentInput
+                        type={item.child?.[0]?.inputType}
                         register={register(`${item.id}_${item.child[0].id}`)}
                       />
                     </td>
@@ -148,6 +180,7 @@ const EditAddBook = () => {
                       <th>{inputnames[`${item.id}_${child.id}`]}</th>
                       <td>
                         <TranparentInput
+                          type={child.inputType}
                           register={register(`${item.id}_${child.id}`)}
                         />
                       </td>
@@ -163,8 +196,15 @@ const EditAddBook = () => {
               <input type="file" {...register("file")} />
             </td>
           </tr>
+          <tr>
+            <th colSpan={2}>Image upload</th>
+            <td colSpan={2}>
+              <input type="file" multiple onChange={handleImages} />
+            </td>
+          </tr>
         </tbody>
       </table>
+      <button type="submit">save</button>
     </form>
   );
 };

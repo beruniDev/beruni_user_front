@@ -7,14 +7,14 @@ export interface FileItem {
   id: number | string;
 }
 interface FileUploaderProps {
-  // onFilesSelected: (formData: FileItem[]) => void;
+  onFilesSelected: (formData: FileItem[]) => void;
   inputRef?: any;
   tableHead?: string;
   name: string | number;
 }
 
 const UploadComponent: FC<FileUploaderProps> = ({
-  // onFilesSelected,
+  onFilesSelected,
   name,
   inputRef,
   tableHead,
@@ -44,7 +44,7 @@ const UploadComponent: FC<FileUploaderProps> = ({
   const handleFileDelete = (id: number | string) => {
     const updatedFileList = fileList.filter((item) => item.id !== id);
     setFileList(updatedFileList);
-    // onFilesSelected(updatedFileList);
+    onFilesSelected(updatedFileList);
   };
 
   return (

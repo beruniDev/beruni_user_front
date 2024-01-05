@@ -19,39 +19,36 @@ const column = [
 const BookList = () => {
   const currentPage = Number(useQueryString("page")) || 1;
 
-  const { data: comments, isLoading } = useBooks({
+  const { data: books, isLoading } = useBooks({
     page: currentPage,
-    enabled: false,
   });
 
   return (
     <div>
       <div className="content">
-        <ItemsCount data={comments} />
+        <ItemsCount data={books} />
         <table className="w-full">
           <TableHead column={column} />
 
-          {!!comments?.items?.length && (
+          {!!books?.items?.length && (
             <tbody>
-              {comments?.items?.map((comment: any, idx: number) => (
+              {books?.items?.map((book, idx: number) => (
                 <tr key={idx} className="bg-blue">
                   <td width="40">{handleIdx(idx)}</td>
-                  <td>{comment.user?.full_name}</td>
                   <td>
-                    <Link to={`/comments/${comment?.request?.id}`}>
-                      {comment?.request?.id}
-                    </Link>
+                    <Link to={`/admin/book/${book?.id}`}>{book.title}</Link>
                   </td>
-                  <td>rate</td>
-                  <td>{comment?.comment}</td>
-                  <td>dayjs</td>
+                  <td>{book?.author}</td>
+                  <td>{book.language}</td>
+                  <td>{book?.descript_auth}</td>
+                  <td>{book.date_written}</td>
                 </tr>
               ))}
             </tbody>
           )}
         </table>
-        {!!comments && <Pagination totalPages={comments.pages} />}
-        {!comments?.items?.length && !isLoading && <EmptyList />}
+        {!!books && <Pagination totalPages={books.pages} />}
+        {!books?.items?.length && !isLoading && <EmptyList />}
       </div>
     </div>
   );

@@ -1,22 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "src/main";
+import { BookTypes } from "src/utils/types";
 
-export const useBooks = ({
-  enabled = true,
-  phone_number,
-  page,
-}: {
+interface Params {
+  title?: string;
+  inventory_number?: string;
+  author?: string;
+  language?: string;
+  subjects?: string;
+  illustration?: string;
   enabled?: boolean;
-  phone_number?: string;
+  id?: number | string;
   page?: number;
-}) => {
+  size?: number;
+}
+
+export const useBooks = (params: Params) => {
   return useQuery({
-    queryKey: ["books", page],
+    queryKey: ["books", params],
     queryFn: () =>
       apiClient
-        .get({ url: "/user/get/create", params: { phone_number, page } })
-        .then(({ data: response }) => response as any),
-    enabled,
+        .get({ url: "/books", params })
+        .then(({ data: response }) => response as BookTypes),
+    enabled: params.enabled,
   });
 };
 
