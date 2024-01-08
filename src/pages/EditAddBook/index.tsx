@@ -18,7 +18,6 @@ import {
   FileType,
   bookValues,
   detectFileType,
-  imageConverter,
   inputnames,
 } from "src/utils/helpers";
 
@@ -215,10 +214,7 @@ const EditAddBook = () => {
                 <tr key={item.id}>
                   <th colSpan={2}>{inputnames[`${item.id}`]}</th>
                   <td colSpan={3} className="p-0 relative">
-                    <TranparentInput
-                      register={register(`${item.id}`)}
-                      // type={item?.inputType}
-                    />
+                    <TranparentInput register={register(`${item.id}`)} />
                   </td>
                 </tr>
               );

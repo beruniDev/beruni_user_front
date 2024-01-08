@@ -37,6 +37,7 @@ const App = () => {
                 <Route element={<SearchTome />} path={"tome-search"} />
                 <Route element={<DetailedSearch />} path={"detailed-search"} />
                 <Route element={<Login />} path={"login"} />
+                <Route element={<BookList />} index path={"list"} />
               </Route>
             ) : (
               // admin routes

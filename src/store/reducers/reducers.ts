@@ -1,8 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import auth from "./auth";
-import images from "./imageUpload";
+import filter from "./filter";
 
 export default combineReducers({
+  filter,
   auth,
-  images,
 });

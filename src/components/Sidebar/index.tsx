@@ -22,6 +22,10 @@ const routes = [
     name: "Detailed search",
     url: "/users/detailed-search",
   },
+  {
+    name: "List",
+    url: "/users/list",
+  },
 ];
 
 const adminRoutes = [
