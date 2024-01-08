@@ -22,15 +22,13 @@ const TranparentInput: FC<Props> = ({
   ...others
 }) => {
   return (
-    <div className="w-full min-h-[48px] h-full relative ">
-      <input
-        className={cl("absolute inset-0 py-1 px-2", className)}
-        placeholder={placeholder || ""}
-        ref={ref}
-        {...register}
-        {...others}
-      />
-    </div>
+    <input
+      className={cl("absolute inset-0 py-1 px-2", className)}
+      placeholder={placeholder || ""}
+      ref={ref}
+      {...register}
+      {...others}
+    />
   );
 };
 

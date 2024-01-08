@@ -8,7 +8,6 @@ const filesMutation = () => {
   return useMutation({
     mutationKey: ["image_upload"],
     mutationFn: async (body: any) => {
-      console.log(body, "body");
       const { data } = await apiClient.post({
         url: "/files",
         body,

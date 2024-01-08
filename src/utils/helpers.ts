@@ -108,3 +108,37 @@ export const handleIdx = (index: number) => {
   if (currentPage === 1) return index + 1;
   else return index + 1 + itemsPerPage * (currentPage - 1);
 };
+export const imageConverter = (img: File) => {
+  if (img?.size) return URL.createObjectURL(img);
+  return "";
+};
+
+export enum FileType {
+  other = "other",
+  video = "video",
+  photo = "photo",
+}
+
+export const detectFileType = (url: string) => {
+  const extension = url.split(".").pop()?.toLowerCase();
+  const imageExtensions = [
+    "jpg",
+    "jpeg",
+    "png",
+    "gif",
+    "bmp",
+    "HEIC",
+    "IMG",
+    "TIFF",
+    "svg",
+  ];
+  const videoExtensions = ["mp4", "avi", "mkv", "mov", "webm"];
+
+  if (extension && imageExtensions.includes(extension)) {
+    return FileType.photo;
+  } else if (extension && videoExtensions.includes(extension)) {
+    return FileType.video;
+  } else {
+    return FileType.other;
+  }
+};

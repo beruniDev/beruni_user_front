@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import EmptyList from "src/components/EmptyList";
 import ItemsCount from "src/components/ItemsCount";
 import Pagination from "src/components/Pagination";
@@ -14,9 +14,11 @@ const column = [
   { name: "Language", key: "rate" },
   { name: "Author of description", key: "status" },
   { name: "Date of writing", key: "date" },
+  { name: "", key: "" },
 ];
 
 const BookList = () => {
+  const navigate = useNavigate();
   const currentPage = Number(useQueryString("page")) || 1;
 
   const { data: books, isLoading } = useBooks({
@@ -27,7 +29,7 @@ const BookList = () => {
     <div>
       <div className="content">
         <ItemsCount data={books} />
-        <table className="w-full">
+        <table className="w-full bordered">
           <TableHead column={column} />
 
           {!!books?.items?.length && (
@@ -35,13 +37,24 @@ const BookList = () => {
               {books?.items?.map((book, idx: number) => (
                 <tr key={idx} className="bg-blue">
                   <td width="40">{handleIdx(idx)}</td>
-                  <td>
-                    <Link to={`/admin/book/${book?.id}`}>{book.title}</Link>
-                  </td>
+                  <td>{book.title}</td>
                   <td>{book?.author}</td>
                   <td>{book.language}</td>
                   <td>{book?.descript_auth}</td>
                   <td>{book.date_written}</td>
+                  <td>
+                    <Link
+                      to={`/admin/book/${book?.id}`}
+                      id="edit_item"
+                      className="text-blue-500"
+                    >
+                      <img
+                        className={"h-4 w-4 cursor-pointer"}
+                        src="/assets/icons/edit.svg"
+                        alt="edit"
+                      />
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>

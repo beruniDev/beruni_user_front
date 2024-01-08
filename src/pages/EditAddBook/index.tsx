@@ -1,11 +1,26 @@
-import { ChangeEvent, Fragment, useEffect, useState } from "react";
+import { ChangeEvent, Fragment, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Button from "src/components/Button";
+import Loading from "src/components/Loader";
+import Modal from "src/components/Modal";
 import TranparentInput from "src/components/TranparentInput";
 import bookMutation from "src/hooks/mutation/book";
 import filesMutation from "src/hooks/mutation/files";
 import useBooks from "src/hooks/useBooks";
-import { bookValues, inputnames } from "src/utils/helpers";
+import {
+  useNavigateParams,
+  useRemoveParams,
+} from "src/hooks/useCustomNavigate";
+import useQueryString from "src/hooks/useQueryString";
+import { baseURL } from "src/main";
+import {
+  FileType,
+  bookValues,
+  detectFileType,
+  imageConverter,
+  inputnames,
+} from "src/utils/helpers";
 
 const tableArr = [
   { name: "Inv. №", id: 1 },
@@ -32,7 +47,7 @@ const tableArr = [
       { name: "Compiler (name) as in manuscript", id: 8 },
     ],
   },
-  { name: "Date of writing", id: 4, inputType: "date" },
+  { name: "Date of writing", id: 4 },
   { name: "Language", id: 5 },
   { name: "Subject", id: 6 },
   {
@@ -58,7 +73,7 @@ const tableArr = [
     name: "Date, Place of Copying",
     id: 12,
     child: [
-      { name: "Date of Copying", id: 1, inputType: "date" },
+      { name: "Date of Copying", id: 1 },
       { name: "Place of Copying", id: 2 },
     ],
   },
@@ -86,31 +101,43 @@ const tableArr = [
 
 const EditAddBook = () => {
   const { id } = useParams();
-  const { register, reset, getValues, handleSubmit } = useForm();
-  const [images, $images] = useState<any>();
+  const navigate = useNavigate();
+  const photo = useQueryString("photo");
+  const removeParams = useRemoveParams();
+  const navigateParams = useNavigateParams();
+  const { register, reset, getValues, handleSubmit, watch } = useForm();
+  const [images, $images] = useState<string[]>([]);
+  const { refetch } = useBooks({ enabled: false });
 
   const { data } = useBooks({ id, enabled: !!id });
 
   const book = data?.items?.[0];
 
-  const { mutate } = bookMutation();
+  const { mutate, isPending } = bookMutation();
 
-  const { mutate: fileUpload } = filesMutation();
+  const { mutate: fileUpload, isPending: imagePending } = filesMutation();
 
   const onSubmit = () => {
     const body = Object.entries(bookValues)?.reduce((acc: any, item) => {
-      if (typeof getValues(item[1].toString()) === "object")
-        acc[item[0]] = getValues(item[1].toString())[0];
+      if (typeof getValues(item?.[1]?.toString()) === "object")
+        acc[item[0]] = getValues(item?.[1]?.toString())?.[0];
       else {
-        if (getValues(item[1].toString()))
-          acc[item[0]] = getValues(item[1].toString());
+        if (getValues(item?.[1]?.toString()))
+          acc[item[0]] = getValues(item?.[1]?.toString());
       }
       return acc;
     }, {});
-    body.images = images.toString();
+    body.images = images?.toString();
 
-    mutate(body);
+    mutate(body, {
+      onSuccess: () => {
+        refetch();
+        navigate("/admin/list");
+      },
+    });
   };
+
+  const closeModal = () => removeParams(["photo"]);
 
   const handleImages = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files!;
@@ -120,9 +147,49 @@ const EditAddBook = () => {
       formData.append("files", files[i]);
     }
     fileUpload(formData, {
-      onSuccess: (data) => $images(data.files),
+      onSuccess: (data) => $images((prev) => [...prev, ...data?.files]),
     });
   };
+
+  const handleFileDelete = (index: number) => () => {
+    $images((prev) => prev.filter((_, idx) => idx !== index));
+  };
+
+  const handleShowPhoto = (file: string) => () => {
+    if (detectFileType(file) === FileType.other)
+      return window.open(`${baseURL}/${file}`);
+    else navigateParams({ photo: `${baseURL}/${file}` });
+  };
+
+  const renderImage = useMemo(() => {
+    if (images?.length)
+      return (
+        <div className="flex gap-2 w-full flex-wrap mt-4">
+          {images.map((image, idx) => (
+            <div className="relative h-36 w-36" key={image + idx}>
+              <div
+                className="absolute top-1 right-1 border border-black rounded-full"
+                onClick={handleFileDelete(idx)}
+              >
+                <img src="/assets/icons/clear.svg" alt="delete" />
+              </div>
+              <div onClick={handleShowPhoto(image)}>
+                <img
+                  src={`${baseURL}/${image}`}
+                  alt="image"
+                  height={150}
+                  width={150}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+  }, [images]);
+
+  useEffect(() => {
+    if (book?.images?.length) $images((prev) => [...prev, ...book?.images]);
+  }, [book?.images]);
 
   useEffect(() => {
     if (book) {
@@ -147,10 +214,10 @@ const EditAddBook = () => {
               return (
                 <tr key={item.id}>
                   <th colSpan={2}>{inputnames[`${item.id}`]}</th>
-                  <td colSpan={3}>
+                  <td colSpan={3} className="p-0 relative">
                     <TranparentInput
                       register={register(`${item.id}`)}
-                      type={item?.inputType}
+                      // type={item?.inputType}
                     />
                   </td>
                 </tr>
@@ -167,9 +234,9 @@ const EditAddBook = () => {
                       {inputnames[`${item.id}_${item.child[0].id}`]}
                     </th>
 
-                    <td colSpan={3}>
+                    <td colSpan={3} className="p-0 relative">
                       <TranparentInput
-                        type={item.child?.[0]?.inputType}
+                        // type={item.child?.[0]?.inputType}
                         register={register(`${item.id}_${item.child[0].id}`)}
                       />
                     </td>
@@ -178,9 +245,8 @@ const EditAddBook = () => {
                   {item.child.slice(1).map((child) => (
                     <tr key={`${item.id}_${child.id}`}>
                       <th>{inputnames[`${item.id}_${child.id}`]}</th>
-                      <td>
+                      <td className="p-0 relative">
                         <TranparentInput
-                          type={child.inputType}
                           register={register(`${item.id}_${child.id}`)}
                         />
                       </td>
@@ -193,7 +259,26 @@ const EditAddBook = () => {
           <tr>
             <th colSpan={2}>File upload</th>
             <td colSpan={2}>
-              <input type="file" {...register("file")} />
+              <div className="flex">
+                {!!book?.file && typeof watch("file") === "string" && (
+                  <div
+                    onClick={handleShowPhoto(book.file)}
+                    className="text-blue-500 flex-1 cursor-pointer"
+                  >
+                    file
+                  </div>
+                )}
+                {watch("file")?.length && typeof watch("file") === "object" && (
+                  <div
+                    // onClick={handleShowPhoto(book.file)}
+                    className="text-blue-500 flex-1"
+                  >
+                    uploaded file
+                  </div>
+                )}
+
+                <input type="file" {...register("file")} className="flex-1" />
+              </div>
             </td>
           </tr>
           <tr>
@@ -204,7 +289,35 @@ const EditAddBook = () => {
           </tr>
         </tbody>
       </table>
-      <button type="submit">save</button>
+
+      {renderImage}
+
+      <Button className="bg-primary my-3" type="submit">
+        Save
+      </Button>
+
+      {(isPending || imagePending) && <Loading absolute />}
+
+      <Modal isOpen={!!photo} onClose={closeModal}>
+        <div className={"relative"}>
+          <button onClick={closeModal} className={"absolute top-2 right-2"}>
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {photo && detectFileType(photo) === FileType.photo ? (
+            <img
+              src={photo}
+              className={"max-h-[80vh] h-full max-w[80vw] block"}
+              alt="uploaded-file"
+            />
+          ) : (
+            <video
+              src={photo || ""}
+              className={"max-h-[80vh] h-full max-w[80vw] block"}
+              controls
+            />
+          )}
+        </div>
+      </Modal>
     </form>
   );
 };
