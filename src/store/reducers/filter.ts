@@ -14,7 +14,10 @@ export const filterReducer = createSlice({
   name: "filter",
   initialState,
   reducers: {
-    filterHandler: (state, { payload }: PayloadAction<typeof bookValues>) => {
+    filterHandler: (
+      state,
+      { payload }: PayloadAction<typeof bookValues | undefined>
+    ) => {
       state.filter = payload;
     },
   },

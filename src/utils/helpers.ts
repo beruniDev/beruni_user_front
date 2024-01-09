@@ -53,7 +53,7 @@ export const bookValues = {
   fixation: "19",
   note: "20",
   descript_auth: "21",
-  file: "file",
+  // file: "file",
 };
 
 export const inputnames: any = {

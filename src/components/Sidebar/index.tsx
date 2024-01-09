@@ -33,14 +33,14 @@ const adminRoutes = [
     name: "Add",
     url: "/admin/add",
   },
-  {
-    name: "Change",
-    url: "/admin/change",
-  },
-  {
-    name: "On basis of",
-    url: "/admin/on-basis-of",
-  },
+  // {
+  //   name: "Change",
+  //   url: "/admin/change",
+  // },
+  // {
+  //   name: "On basis of",
+  //   url: "/admin/on-basis-of",
+  // },
   {
     name: "Filter",
     url: "/admin/filter",
@@ -59,7 +59,7 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     dispatch(logoutHandler());
-    navigate("/user/main");
+    navigate("/users/main");
   };
 
   return (

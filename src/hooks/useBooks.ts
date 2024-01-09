@@ -4,7 +4,7 @@ import { BookTypes } from "src/utils/types";
 
 interface Params {
   title?: string;
-  inventory_number?: string;
+  inventory_number?: string | number;
   author?: string;
   language?: string;
   subjects?: string;
@@ -12,7 +12,7 @@ interface Params {
   enabled?: boolean;
   id?: number | string;
   page?: number;
-  size?: number;
+  size?: string | number;
 }
 
 export const useBooks = (params: Params) => {

@@ -43,8 +43,9 @@ const App = () => {
               // admin routes
               <Route path={"/admin"}>
                 <Route element={<EditAddBook />} index path={"add"} />
-                <Route element={<EditAddBook />} index path={"book/:id"} />
+                <Route element={<EditAddBook />} index path={"list/:id"} />
                 <Route element={<BookList />} index path={"list"} />
+                <Route element={<Search />} path={"filter"} />
               </Route>
             )}
           </Routes>

@@ -1,6 +1,6 @@
 import { ChangeEvent, Fragment, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Button from "src/components/Button";
 import Loading from "src/components/Loader";
 import Modal from "src/components/Modal";
@@ -20,6 +20,7 @@ import {
   detectFileType,
   inputnames,
 } from "src/utils/helpers";
+import { errorToast } from "src/utils/toast";
 
 const tableArr = [
   { name: "Inv. №", id: 1 },
@@ -100,11 +101,13 @@ const tableArr = [
 
 const EditAddBook = () => {
   const { id } = useParams();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const photo = useQueryString("photo");
   const removeParams = useRemoveParams();
   const navigateParams = useNavigateParams();
-  const { register, reset, getValues, handleSubmit, watch } = useForm();
+  const { register, reset, getValues, handleSubmit, watch, setValue } =
+    useForm();
   const [images, $images] = useState<string[]>([]);
   const { refetch } = useBooks({ enabled: false });
 
@@ -127,12 +130,14 @@ const EditAddBook = () => {
       return acc;
     }, {});
     body.images = images?.toString();
+    !!getValues("file") && (body.file = getValues("file")[0]);
 
     mutate(body, {
       onSuccess: () => {
         refetch();
         navigate("/admin/list");
       },
+      onError: (e) => errorToast(e.message),
     });
   };
 
@@ -186,12 +191,37 @@ const EditAddBook = () => {
       );
   }, [images]);
 
+  const renderModal = useMemo(() => {
+    return (
+      <Modal isOpen={!!photo} onClose={closeModal}>
+        <div className={"relative"}>
+          <button onClick={closeModal} className={"absolute top-2 right-2"}>
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {photo && detectFileType(photo) === FileType.photo ? (
+            <img
+              src={photo}
+              className={"max-h-[80vh] h-full max-w[80vw] block"}
+              alt="uploaded-file"
+            />
+          ) : (
+            <video
+              src={photo || ""}
+              className={"max-h-[80vh] h-full max-w[80vw] block"}
+              controls
+            />
+          )}
+        </div>
+      </Modal>
+    );
+  }, [photo]);
+
   useEffect(() => {
     if (book?.images?.length) $images((prev) => [...prev, ...book?.images]);
   }, [book?.images]);
 
   useEffect(() => {
-    if (book) {
+    if (book && id) {
       const initialVals = Object.entries(bookValues).reduce(
         (acc: any, item) => {
           //@ts-ignore
@@ -202,7 +232,12 @@ const EditAddBook = () => {
       );
       reset(initialVals);
     }
-  }, [book]);
+  }, [book, id]);
+
+  useEffect(() => {
+    if (!id) Object.keys(getValues()).forEach((item) => setValue(item, ""));
+    if (!id && !!images.length) $images([]);
+  }, [pathname]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -256,7 +291,7 @@ const EditAddBook = () => {
             <th colSpan={2}>File upload</th>
             <td colSpan={2}>
               <div className="flex">
-                {!!book?.file && typeof watch("file") === "string" && (
+                {!!book?.file && (
                   <div
                     onClick={handleShowPhoto(book.file)}
                     className="text-blue-500 flex-1 cursor-pointer"
@@ -264,14 +299,15 @@ const EditAddBook = () => {
                     file
                   </div>
                 )}
-                {watch("file")?.length && typeof watch("file") === "object" && (
-                  <div
-                    // onClick={handleShowPhoto(book.file)}
-                    className="text-blue-500 flex-1"
-                  >
-                    uploaded file
-                  </div>
-                )}
+                {!!watch("file")?.length &&
+                  typeof watch("file") === "object" && (
+                    <div
+                      // onClick={handleShowPhoto(book.file)}
+                      className="text-blue-500 flex-1"
+                    >
+                      uploaded file
+                    </div>
+                  )}
 
                 <input type="file" {...register("file")} className="flex-1" />
               </div>
@@ -294,26 +330,7 @@ const EditAddBook = () => {
 
       {(isPending || imagePending) && <Loading absolute />}
 
-      <Modal isOpen={!!photo} onClose={closeModal}>
-        <div className={"relative"}>
-          <button onClick={closeModal} className={"absolute top-2 right-2"}>
-            <span aria-hidden="true">&times;</span>
-          </button>
-          {photo && detectFileType(photo) === FileType.photo ? (
-            <img
-              src={photo}
-              className={"max-h-[80vh] h-full max-w[80vw] block"}
-              alt="uploaded-file"
-            />
-          ) : (
-            <video
-              src={photo || ""}
-              className={"max-h-[80vh] h-full max-w[80vw] block"}
-              controls
-            />
-          )}
-        </div>
-      </Modal>
+      {renderModal}
     </form>
   );
 };

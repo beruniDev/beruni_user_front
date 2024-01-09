@@ -21,8 +21,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <App />
+          <ToastContainer autoClose={600} />
         </BrowserRouter>
-        <ToastContainer autoClose={700} />
       </QueryClientProvider>
     </PersistGate>
   </Provider>
