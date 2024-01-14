@@ -1,92 +1,85 @@
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import BaseInput from "src/components/BaseInputs";
+import MainInput from "src/components/BaseInputs/MainInput";
 import Button from "src/components/Button";
+import Loading from "src/components/Loader";
+import TableHead from "src/components/TableHead";
 import Title from "src/components/Title";
-import TranparentInput from "src/components/TranparentInput";
-import { tokenSelector } from "src/store/reducers/auth";
-import { filterHandler, filterSelector } from "src/store/reducers/filter";
-import { useAppDispatch, useAppSelector } from "src/store/utils/types";
-import { bookValues } from "src/utils/helpers";
+import useBookSearch from "src/hooks/useBookSearch";
+import { handleIdx } from "src/utils/helpers";
+
+const column = [
+  { name: "№", key: "id" },
+  { name: "name", key: "purchaser" },
+  { name: "Author", key: "id" },
+  { name: "Language", key: "rate" },
+  { name: "Author of description", key: "status" },
+  { name: "Date of writing", key: "date" },
+];
 
 const Search = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const filter = useAppSelector(filterSelector);
-  const token = useAppSelector(tokenSelector);
-  const { register, handleSubmit, reset, getValues, setValue } = useForm();
+  const { register, getValues, handleSubmit } = useForm();
+
+  const {
+    data: books,
+    isLoading,
+    refetch,
+    isFetching,
+  } = useBookSearch({ enabled: false, text: getValues("search") });
 
   const onSubmit = () => {
-    const values = Object.entries(getValues()).reduce((acc: any, item) => {
-      if (!!item[1]) acc[item[0]] = item[1];
-      return acc;
-    }, {});
-    dispatch(filterHandler(values as typeof bookValues));
-    navigate(`/${!!token ? "admin" : "users"}/list`);
+    refetch();
   };
-
-  const handleReset = () => {
-    dispatch(filterHandler(undefined));
-    Object.keys(getValues()).forEach((item) => setValue(item, ""));
-  };
-
-  useEffect(() => {
-    reset(filter);
-  }, []);
-
   return (
     <div className="flex flex-1 flex-col p-1">
       <Title title="Search" />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <table className="bordered w-full mt-4">
-          <tbody>
-            <tr>
-              <th className="w-[300px]">Inventory number:</th>
-              <td className="p-0 relative">
-                <TranparentInput register={register("inventory_number")} />
-              </td>
-            </tr>
-            <tr>
-              <th>Title:</th>
-              <td className="p-0 relative">
-                <TranparentInput register={register("title")} />
-              </td>
-            </tr>
-            <tr>
-              <th>Author name:</th>
-              <td className="p-0 relative">
-                <TranparentInput register={register("author")} />
-              </td>
-            </tr>
-            <tr>
-              <th>Language:</th>
-              <td className="p-0 relative">
-                <TranparentInput register={register("language")} />
-              </td>
-            </tr>
-            <tr>
-              <th>Subject:</th>
-              <td className="p-0 relative">
-                <TranparentInput register={register("subjects")} />
-              </td>
-            </tr>
-            <tr>
-              <th>Illustartion:</th>
-              <td className="p-0 relative">
-                <TranparentInput register={register("quantity_ill")} />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div className="mt-6 flex gap-4">
-          <Button type="submit" className="bg-gray-300">
-            Apply
-          </Button>
-          <Button onClick={handleReset} className="bg-blue-600 text-white">
-            Reset
+        <div className="mt-10 flex gap-4">
+          <BaseInput className="flex flex-1">
+            <MainInput register={register("search")} />
+          </BaseInput>
+
+          <Button className="bg-gray-300" type="submit">
+            Search
           </Button>
         </div>
       </form>
+
+      {!!books?.items?.length && (
+        <table className="w-full bordered my-4">
+          <TableHead column={column} />
+
+          <tbody>
+            {books?.items?.map((book, idx: number) => (
+              <tr key={idx} className="bg-blue">
+                <td width="40">{handleIdx(idx)}</td>
+                <td>{book.title}</td>
+                <td>{book?.author}</td>
+                <td>{book.language}</td>
+                <td>{book?.descript_auth}</td>
+                <td>{book.date_written}</td>
+                {/* {!!token && (
+                    <td>
+                      <Link
+                        to={`/admin/list/${book?.id}`}
+                        id="edit_item"
+                        className="text-blue-500"
+                      >
+                        <img
+                          className={"h-4 w-4 cursor-pointer"}
+                          src="/assets/icons/edit.svg"
+                          alt="edit"
+                        />
+                      </Link>
+                    </td>
+                  )} */}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      {(isLoading || isFetching) && <Loading absolute />}
     </div>
   );
 };

@@ -40,7 +40,7 @@ const BookList = () => {
     <div>
       <div className="content">
         <ItemsCount data={books} />
-        <table className="w-full bordered">
+        <table className="w-full bordered mb-4">
           <TableHead column={column} />
 
           {!!books?.items?.length && (
