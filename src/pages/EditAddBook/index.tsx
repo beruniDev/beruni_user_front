@@ -109,7 +109,6 @@ const EditAddBook = () => {
   const { register, reset, getValues, handleSubmit, watch, setValue } =
     useForm();
   const [images, $images] = useState<string[]>([]);
-  const { refetch } = useBooks({ enabled: false });
 
   const { data } = useBooks({ id, enabled: !!id });
 
@@ -134,7 +133,6 @@ const EditAddBook = () => {
 
     mutate(body, {
       onSuccess: () => {
-        refetch();
         navigate("/admin/list");
       },
       onError: (e) => errorToast(e.message),
@@ -236,9 +234,8 @@ const EditAddBook = () => {
 
   useEffect(() => {
     if (!id) Object.keys(getValues()).forEach((item) => setValue(item, ""));
-    if (!id && !!images.length) $images([]);
+    if (!id) $images([]);
   }, [pathname]);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <table className="bordered w-full">
@@ -291,7 +288,7 @@ const EditAddBook = () => {
             <th colSpan={2}>File upload</th>
             <td colSpan={2}>
               <div className="flex">
-                {!!book?.file && (
+                {!!book?.file && !!id && (
                   <div
                     onClick={handleShowPhoto(book.file)}
                     className="text-blue-500 flex-1 cursor-pointer"
@@ -324,7 +321,7 @@ const EditAddBook = () => {
 
       {renderImage}
 
-      <Button className="bg-primary my-3" type="submit">
+      <Button className="bg-primary my-3 text-white" type="submit">
         Save
       </Button>
 

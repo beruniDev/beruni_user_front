@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import EmptyList from "src/components/EmptyList";
 import ItemsCount from "src/components/ItemsCount";
@@ -17,7 +17,11 @@ const BookList = () => {
   const filter = useAppSelector(filterSelector);
   const token = useAppSelector(tokenSelector);
 
-  const { data: books, isLoading } = useBooks({
+  const {
+    data: books,
+    isLoading,
+    refetch,
+  } = useBooks({
     page: currentPage,
     ...filter,
   });
@@ -34,6 +38,10 @@ const BookList = () => {
     if (token) init.push({ name: "", key: "" });
 
     return init;
+  }, []);
+
+  useEffect(() => {
+    refetch();
   }, []);
 
   return (

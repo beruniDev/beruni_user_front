@@ -4,6 +4,7 @@ import cl from "classnames";
 import { Fragment } from "react";
 import { useAppDispatch, useAppSelector } from "src/store/utils/types";
 import { logoutHandler, tokenSelector } from "src/store/reducers/auth";
+import Button from "../Button";
 
 const routes = [
   {
@@ -94,14 +95,14 @@ const Sidebar = () => {
             className={cl("flex items-center justify-center")}
             to={"/users/login"}
           >
-            Login
+            <Button className="bg-green-500">Login</Button>
           </Link>
         ) : (
           <div
             onClick={handleLogout}
             className={cl("flex items-center justify-center cursor-pointer")}
           >
-            Logout
+            <Button className="bg-red-500 text-white">Logout</Button>
           </div>
         )}
       </div>
