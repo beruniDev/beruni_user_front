@@ -13,7 +13,6 @@ const SearchTome = () => {
         <BaseInput className="flex flex-1">
           <MainInput register={register("search")} />
         </BaseInput>
-
         <Button className="bg-gray-300">Search</Button>
       </div>
     </div>

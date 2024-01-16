@@ -37,13 +37,13 @@ const App = () => {
                 <Route element={<SearchTome />} path={"tome-search"} />
                 <Route element={<DetailedSearch />} path={"detailed-search"} />
                 <Route element={<Login />} path={"login"} />
-                <Route element={<BookList />} index path={"list"} />
+                <Route element={<BookList />} path={"list"} />
               </Route>
             ) : (
               // admin routes
               <Route path={"/admin"}>
-                <Route element={<EditAddBook />} index path={"add"} />
-                <Route element={<EditAddBook />} index path={"list/:id"} />
+                <Route element={<EditAddBook />} path={"add"} />
+                <Route element={<EditAddBook />} path={"list/:id"} />
                 <Route element={<BookList />} index path={"list"} />
                 <Route element={<Search />} path={"filter"} />
               </Route>

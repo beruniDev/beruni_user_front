@@ -1,7 +1,8 @@
 import { useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import EmptyList from "src/components/EmptyList";
 import ItemsCount from "src/components/ItemsCount";
+import Loading from "src/components/Loader";
 import Pagination from "src/components/Pagination";
 import TableHead from "src/components/TableHead";
 import useBooks from "src/hooks/useBooks";
@@ -12,7 +13,6 @@ import { useAppSelector } from "src/store/utils/types";
 import { handleIdx } from "src/utils/helpers";
 
 const BookList = () => {
-  const navigate = useNavigate();
   const currentPage = Number(useQueryString("page")) || 1;
   const filter = useAppSelector(filterSelector);
   const token = useAppSelector(tokenSelector);
@@ -73,6 +73,7 @@ const BookList = () => {
             </tbody>
           )}
         </table>
+        {isLoading && <Loading absolute />}
         {!!books && <Pagination totalPages={books.pages} />}
         {!books?.items?.length && !isLoading && <EmptyList />}
       </div>

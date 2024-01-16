@@ -4,11 +4,11 @@ import MainInput from "src/components/BaseInputs/MainInput";
 import Button from "src/components/Button";
 import Title from "src/components/Title";
 
-const DetailedSearch = () => {
+const Search = () => {
   const { register } = useForm();
   return (
     <div className="flex flex-1 flex-col p-1">
-      <Title title="Detailed search" />
+      <Title title="Detailed Search" />
       <div className="mt-10 flex gap-4">
         <BaseInput className="flex flex-1">
           <MainInput register={register("search")} />
@@ -20,4 +20,4 @@ const DetailedSearch = () => {
   );
 };
 
-export default DetailedSearch;
+export default Search;
