@@ -36,7 +36,7 @@ const DetailedSearch = () => {
 
   return (
     <div className="flex flex-1 flex-col p-1">
-      <Title title="Detailed search" />
+      <Title title={!token ? "Detailed search" : "Filter"} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <table className="bordered w-full mt-4">
           <tbody>
@@ -91,4 +91,4 @@ const DetailedSearch = () => {
   );
 };
 
-export default Search;
+export default DetailedSearch;

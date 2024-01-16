@@ -42,6 +42,10 @@ const adminRoutes = [
   //   url: "/admin/on-basis-of",
   // },
   {
+    name: "Search",
+    url: "/admin/search",
+  },
+  {
     name: "Filter",
     url: "/admin/filter",
   },

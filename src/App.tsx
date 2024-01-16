@@ -45,7 +45,8 @@ const App = () => {
                 <Route element={<EditAddBook />} path={"add"} />
                 <Route element={<EditAddBook />} path={"list/:id"} />
                 <Route element={<BookList />} index path={"list"} />
-                <Route element={<Search />} path={"filter"} />
+                <Route element={<Search />} path={"search"} />
+                <Route element={<DetailedSearch />} path={"filter"} />
               </Route>
             )}
           </Routes>
