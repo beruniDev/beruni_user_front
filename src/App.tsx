@@ -20,7 +20,7 @@ const App = () => {
   const token = useAppSelector(tokenSelector);
 
   useEffect(() => {
-    if (window.location.pathname === "/") navigate("/main");
+    if (window.location.pathname === "/") navigate("/users/main");
   }, []);
 
   return (
