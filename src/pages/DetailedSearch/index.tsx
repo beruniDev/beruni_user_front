@@ -41,7 +41,7 @@ const DetailedSearch = () => {
         <table className="bordered w-full mt-4">
           <tbody>
             <tr>
-              <th className="w-[300px]">Inventory number:</th>
+              <th className="md:w-[300px] w-40">Inventory number:</th>
               <td className="p-0 relative">
                 <TranparentInput register={register("inventory_number")} />
               </td>

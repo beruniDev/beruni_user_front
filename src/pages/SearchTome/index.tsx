@@ -9,11 +9,13 @@ const SearchTome = () => {
   return (
     <div className="flex flex-1 flex-col p-1">
       <Title title="Search by tome" />
-      <div className="mt-10 flex gap-4">
+
+      <div className="mt-10 flex gap-4 md:flex-row flex-col">
         <BaseInput className="flex flex-1">
           <MainInput register={register("search")} />
         </BaseInput>
-        <Button className="bg-gray-300">Search</Button>
+
+        <Button className="bg-gray-300 w-full md:w-52">Search</Button>
       </div>
     </div>
   );

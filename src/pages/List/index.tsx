@@ -45,46 +45,44 @@ const BookList = () => {
   }, []);
 
   return (
-    <div>
-      <div className="content">
-        <ItemsCount data={books} />
-        <table className="w-full bordered mb-4">
-          <TableHead column={column} />
+    <div className="content mb-4">
+      <ItemsCount data={books} />
+      <table className="w-full bordered mb-4">
+        <TableHead column={column} />
 
-          {!!books?.items?.length && (
-            <tbody>
-              {books?.items?.map((book, idx: number) => (
-                <tr key={idx} className="bg-blue">
-                  <td width="40">{handleIdx(idx)}</td>
-                  <td>{book.title}</td>
-                  <td>{book?.author}</td>
-                  <td>{book.language}</td>
-                  <td>{book?.descript_auth}</td>
-                  <td>{book.date_written}</td>
-                  {!!token && (
-                    <td>
-                      <Link
-                        to={`/admin/list/${book?.id}`}
-                        id="edit_item"
-                        className="text-blue-500"
-                      >
-                        <img
-                          className={"h-4 w-4 cursor-pointer"}
-                          src="/assets/icons/edit.svg"
-                          alt="edit"
-                        />
-                      </Link>
-                    </td>
-                  )}
-                </tr>
-              ))}
-            </tbody>
-          )}
-        </table>
-        {isLoading && <Loading absolute />}
-        {!!books && <Pagination totalPages={books.pages} />}
-        {!books?.items?.length && !isLoading && <EmptyList />}
-      </div>
+        {!!books?.items?.length && (
+          <tbody>
+            {books?.items?.map((book, idx: number) => (
+              <tr key={idx}>
+                <td width="40">{handleIdx(idx)}</td>
+                <td>{book.title}</td>
+                <td>{book?.author}</td>
+                <td>{book.language}</td>
+                <td>{book?.descript_auth}</td>
+                <td>{book.date_written}</td>
+                {!!token && (
+                  <td>
+                    <Link
+                      to={`/admin/list/${book?.id}`}
+                      id="edit_item"
+                      className="text-blue-500"
+                    >
+                      <img
+                        className={"h-4 w-4 cursor-pointer"}
+                        src="/assets/icons/edit.svg"
+                        alt="edit"
+                      />
+                    </Link>
+                  </td>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        )}
+      </table>
+      {isLoading && <Loading absolute />}
+      {!!books && <Pagination totalPages={books.pages} />}
+      {!books?.items?.length && !isLoading && <EmptyList />}
     </div>
   );
 };

@@ -26,8 +26,9 @@ const App = () => {
   return (
     <Container className="relative flex flex-col h-[100vh]">
       <Header />
-      <Card className="flex p-4 h-[75vh]">
+      <Card className="flex p-2 h-[73vh] md:p-4 ">
         <Sidebar />
+
         <div className="w-full overflow-y-auto">
           <Routes>
             {!token ? (

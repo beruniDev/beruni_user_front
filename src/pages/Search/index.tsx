@@ -52,12 +52,12 @@ const Search = () => {
     <div className="flex flex-1 flex-col p-1">
       <Title title="Search" />
 
-      <div className="mt-10 flex gap-4">
+      <div className="mt-10 flex gap-4 md:flex-row flex-col">
         <BaseInput className="flex flex-1">
           <MainInput onChange={handleChange} onKeyDown={handleKeyDown} />
         </BaseInput>
 
-        <Button className="bg-gray-300" onClick={onSubmit}>
+        <Button className="bg-gray-300 w-full md:w-52" onClick={onSubmit}>
           Search
         </Button>
       </div>

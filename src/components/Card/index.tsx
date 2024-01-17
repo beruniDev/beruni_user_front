@@ -11,7 +11,7 @@ const Card: FC<Props> = ({ children, className, title }) => {
   return (
     <div
       className={cl(
-        "bg-gray-100 rounded-2xl w-full my-4 pb-4 border border-black",
+        "bg-gray-100 rounded-2xl w-full my-2 md:my-4 pb-4 border border-black",
         className
       )}
     >

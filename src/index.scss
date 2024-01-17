@@ -12,6 +12,7 @@
   -webkit-text-size-adjust: 100%;
 
   --white: #ffffff;
+  --gray: rgb(243, 244, 246);
 }
 body {
   margin: 0;
@@ -55,4 +56,25 @@ body {
 td,
 th {
   padding: 7px 5px;
+
+  min-width: 120px;
+}
+
+.bordered {
+  border: 1px solid black;
+}
+
+.bordered td,
+.bordered th {
+  border: 1px solid black;
+}
+.bordered > :not(caption) > * > * {
+  border-width: 0 1px;
+}
+
+.bordered td {
+  border-right: 1px solid black;
+  &:last-of-type {
+    border-right: 1px solid black;
+  }
 }

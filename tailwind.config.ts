@@ -22,7 +22,6 @@ module.exports = {
         tgGray: "#C3D2DC",
       },
       boxShadow: {
-        // selected: "0px 4px 4px 0px #00000040",
         selected: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
       },
     },
