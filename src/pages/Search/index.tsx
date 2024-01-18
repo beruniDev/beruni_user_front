@@ -78,7 +78,7 @@ const Search = () => {
                 {!!token && (
                   <td>
                     <Link
-                      to={`/admin/list/${book?.id}`}
+                      to={`/list/${book?.id}`}
                       id="edit_item"
                       className="text-blue-500"
                     >

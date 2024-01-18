@@ -22,7 +22,7 @@ const DetailedSearch = () => {
       return acc;
     }, {});
     dispatch(filterHandler(values as typeof bookValues));
-    navigate(`/${!!token ? "admin" : "users"}/list`);
+    navigate("/list");
   };
 
   const handleReset = () => {

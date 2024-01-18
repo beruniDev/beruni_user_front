@@ -14,6 +14,8 @@ import {
 } from "src/hooks/useCustomNavigate";
 import useQueryString from "src/hooks/useQueryString";
 import { baseURL } from "src/main";
+import { tokenSelector } from "src/store/reducers/auth";
+import { useAppSelector } from "src/store/utils/types";
 import {
   FileType,
   bookValues,
@@ -21,83 +23,6 @@ import {
   inputnames,
 } from "src/utils/helpers";
 import { errorToast } from "src/utils/toast";
-
-const tableArr = [
-  { name: "Inv. №", id: 1 },
-  {
-    name: "Title",
-    id: 2,
-    child: [
-      { name: "Title", id: 1 },
-      { name: "Title as in manuscript", id: 2 },
-      { name: "Known also as", id: 3 },
-    ],
-  },
-  {
-    name: "Author",
-    id: 3,
-    child: [
-      { name: "Author (name)", id: 1 },
-      { name: "Author (name) as in manuscript", id: 2 },
-      { name: "Commentator", id: 3 },
-      { name: "Commentator as in manuscript", id: 4 },
-      { name: "Translator", id: 5 },
-      { name: "Translator (name) as In manuscript", id: 6 },
-      { name: "Compiler", id: 7 },
-      { name: "Compiler (name) as in manuscript", id: 8 },
-    ],
-  },
-  { name: "Date of writing", id: 4 },
-  { name: "Language", id: 5 },
-  { name: "Subject", id: 6 },
-  {
-    name: "Quantity of sheets",
-    id: 7,
-    child: [
-      { name: "Quantity of sheets", id: 1 },
-      { name: "Available illustration", id: 2 },
-    ],
-  },
-  {
-    name: "Lines",
-    id: 8,
-    child: [
-      { name: "Quantity of lines", id: 1 },
-      { name: "Quantity of columns", id: 2 },
-    ],
-  },
-  { name: "Size", id: 9 },
-  { name: "Paper", id: 10 },
-  { name: "Copyist", id: 11 },
-  {
-    name: "Date, Place of Copying",
-    id: 12,
-    child: [
-      { name: "Date of Copying", id: 1 },
-      { name: "Place of Copying", id: 2 },
-    ],
-  },
-  { name: "Handwriting kind", id: 13 },
-  { name: "Cover", id: 14 },
-  { name: "Cover color", id: 15 },
-  { name: "Stamp of bookbinder", id: 16 },
-  {
-    name: "Text (partly)",
-    id: 17,
-    child: [
-      { name: "Beginning", id: 1 },
-      { name: "The existing beginning", id: 2 },
-      { name: "Beginning after amma ba'd", id: 3 },
-      { name: "End", id: 4 },
-      { name: "The existing end", id: 5 },
-      { name: "Colophon", id: 6 },
-    ],
-  },
-  { name: "Defects", id: 18 },
-  { name: "Fixation in CBP", id: 19 },
-  { name: "Note", id: 20 },
-  { name: "Author of description", id: 21 },
-];
 
 const EditAddBook = () => {
   const { id } = useParams();
@@ -109,8 +34,95 @@ const EditAddBook = () => {
   const { register, reset, getValues, handleSubmit, watch, setValue } =
     useForm();
   const [images, $images] = useState<string[]>([]);
-
   const { data } = useBooks({ id, enabled: !!id });
+  const token = useAppSelector(tokenSelector);
+
+  const tableArr = useMemo(() => {
+    return [
+      { name: "Inv. №", id: 1, disabled: !token },
+      {
+        name: "Title",
+        id: 2,
+        child: [
+          { name: "Title", id: 1, disabled: !token },
+          { name: "Title as in manuscript", id: 2, disabled: !token },
+          { name: "Known also as", id: 3, disabled: !token },
+        ],
+      },
+      {
+        name: "Author",
+        id: 3,
+        child: [
+          { name: "Author (name)", id: 1, disabled: !token },
+          { name: "Author (name) as in manuscript", id: 2, disabled: !token },
+          { name: "Commentator", id: 3, disabled: !token },
+          { name: "Commentator as in manuscript", id: 4, disabled: !token },
+          { name: "Translator", id: 5, disabled: !token },
+          {
+            name: "Translator (name) as In manuscript",
+            id: 6,
+            disabled: !token,
+          },
+          { name: "Compiler", id: 7, disabled: !token },
+          {
+            name: "Compiler (name) as in manuscript",
+            id: 8,
+            disabled: !token,
+          },
+        ],
+      },
+      { name: "Date of writing", id: 4, disabled: !token },
+      { name: "Language", id: 5, disabled: !token },
+      { name: "Subject", id: 6, disabled: !token },
+      {
+        name: "Quantity of sheets",
+        id: 7,
+        child: [
+          { name: "Quantity of sheets", id: 1, disabled: !token },
+          { name: "Available illustration", id: 2, disabled: !token },
+        ],
+      },
+      {
+        name: "Lines",
+        id: 8,
+        child: [
+          { name: "Quantity of lines", id: 1, disabled: !token },
+          { name: "Quantity of columns", id: 2, disabled: !token },
+        ],
+      },
+      { name: "Size", id: 9, disabled: !token },
+      { name: "Paper", id: 10, disabled: !token },
+      { name: "Copyist", id: 11, disabled: !token },
+      {
+        name: "Date, Place of Copying",
+        id: 12,
+        child: [
+          { name: "Date of Copying", id: 1, disabled: !token },
+          { name: "Place of Copying", id: 2, disabled: !token },
+        ],
+      },
+      { name: "Handwriting kind", id: 13, disabled: !token },
+      { name: "Cover", id: 14, disabled: !token },
+      { name: "Cover color", id: 15, disabled: !token },
+      { name: "Stamp of bookbinder", id: 16, disabled: !token },
+      {
+        name: "Text (partly)",
+        id: 17,
+        child: [
+          { name: "Beginning", id: 1, disabled: !token },
+          { name: "The existing beginning", id: 2, disabled: !token },
+          { name: "Beginning after amma ba'd", id: 3, disabled: !token },
+          { name: "End", id: 4, disabled: !token },
+          { name: "The existing end", id: 5, disabled: !token },
+          { name: "Colophon", id: 6, disabled: !token },
+        ],
+      },
+      { name: "Defects", id: 18, disabled: !token },
+      { name: "Fixation in CBP", id: 19, disabled: !token },
+      { name: "Note", id: 20, disabled: !token },
+      { name: "Author of description", id: 21, disabled: !token },
+    ];
+  }, []);
 
   const book = data?.items?.[0];
 
@@ -133,7 +145,7 @@ const EditAddBook = () => {
 
     mutate(body, {
       onSuccess: () => {
-        navigate("/admin/list");
+        navigate("/list");
       },
       onError: (e) => errorToast(e.message),
     });
@@ -170,10 +182,14 @@ const EditAddBook = () => {
           {images.map((image, idx) => (
             <div className="relative h-36 w-36" key={image + idx}>
               <div
-                className="absolute top-1 right-1 border border-black rounded-full"
+                className="border border-white rounded-full cursor-pointer bg-black absolute top-1 right-1 w-7 h-7 flex items-center justify-center"
                 onClick={handleFileDelete(idx)}
               >
-                <img src="/assets/icons/clear.svg" alt="delete" />
+                <img
+                  src="/assets/icons/clear.svg"
+                  alt="delete"
+                  className="h-3 w-3"
+                />
               </div>
               <div onClick={handleShowPhoto(image)}>
                 <img
@@ -193,19 +209,27 @@ const EditAddBook = () => {
     return (
       <Modal isOpen={!!photo} onClose={closeModal}>
         <div className={"relative"}>
-          <button onClick={closeModal} className={"absolute top-2 right-2"}>
-            <span aria-hidden="true">&times;</span>
+          <button
+            onClick={closeModal}
+            className="border border-white rounded-full cursor-pointer bg-black absolute top-2 right-2 w-7 h-7 flex items-center justify-center"
+          >
+            <img
+              src="/assets/icons/clear.svg"
+              alt="delete"
+              className="w-3 h-3"
+            />
           </button>
+
           {photo && detectFileType(photo) === FileType.photo ? (
             <img
               src={photo}
-              className={"max-h-[80vh] h-full max-w[80vw] block"}
+              className={"max-h-[80vh] h-full max-w-[80vw] block"}
               alt="uploaded-file"
             />
           ) : (
             <video
               src={photo || ""}
-              className={"max-h-[80vh] h-full max-w[80vw] block"}
+              className={"max-h-[80vh] h-full max-w-[80vw] block"}
               controls
             />
           )}
@@ -246,7 +270,11 @@ const EditAddBook = () => {
                 <tr key={item.id}>
                   <th colSpan={2}>{inputnames[`${item.id}`]}</th>
                   <td colSpan={3} className="p-0 relative">
-                    <TranparentInput register={register(`${item.id}`)} />
+                    <TranparentInput
+                      register={register(`${item.id}`, {
+                        disabled: item.disabled,
+                      })}
+                    />
                   </td>
                 </tr>
               );
@@ -265,7 +293,9 @@ const EditAddBook = () => {
                     <td colSpan={3} className="p-0 relative">
                       <TranparentInput
                         // type={item.child?.[0]?.inputType}
-                        register={register(`${item.id}_${item.child[0].id}`)}
+                        register={register(`${item.id}_${item.child[0].id}`, {
+                          disabled: item.disabled,
+                        })}
                       />
                     </td>
                   </tr>
@@ -275,7 +305,9 @@ const EditAddBook = () => {
                       <th>{inputnames[`${item.id}_${child.id}`]}</th>
                       <td className="p-0 relative">
                         <TranparentInput
-                          register={register(`${item.id}_${child.id}`)}
+                          register={register(`${item.id}_${child.id}`, {
+                            disabled: item.disabled,
+                          })}
                         />
                       </td>
                     </tr>
@@ -284,46 +316,56 @@ const EditAddBook = () => {
               );
           })}
 
-          <tr>
-            <th colSpan={2}>File upload</th>
-            <td colSpan={2}>
-              <div className="flex">
-                {!!book?.file && !!id && (
-                  <div
-                    onClick={handleShowPhoto(book.file)}
-                    className="text-blue-500 flex-1 cursor-pointer"
-                  >
-                    file
-                  </div>
-                )}
-                {!!watch("file")?.length &&
-                  typeof watch("file") === "object" && (
-                    <div
-                      // onClick={handleShowPhoto(book.file)}
-                      className="text-blue-500 flex-1"
-                    >
-                      uploaded file
-                    </div>
-                  )}
+          {!!token && (
+            <>
+              <tr>
+                <th colSpan={2}>File upload</th>
+                <td colSpan={2}>
+                  <div className="flex">
+                    {!!book?.file && !!id && (
+                      <div
+                        onClick={handleShowPhoto(book.file)}
+                        className="text-blue-500 flex-1 cursor-pointer"
+                      >
+                        file
+                      </div>
+                    )}
+                    {!!watch("file")?.length &&
+                      typeof watch("file") === "object" && (
+                        <div
+                          // onClick={handleShowPhoto(book.file)}
+                          className="text-blue-500 flex-1"
+                        >
+                          uploaded file
+                        </div>
+                      )}
 
-                <input type="file" {...register("file")} className="flex-1" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th colSpan={2}>Image upload</th>
-            <td colSpan={2}>
-              <input type="file" multiple onChange={handleImages} />
-            </td>
-          </tr>
+                    <input
+                      type="file"
+                      {...register("file")}
+                      className="flex-1"
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th colSpan={2}>Image upload</th>
+                <td colSpan={2}>
+                  <input type="file" multiple onChange={handleImages} />
+                </td>
+              </tr>
+            </>
+          )}
         </tbody>
       </table>
 
       {renderImage}
 
-      <Button className="bg-primary my-3 text-white" type="submit">
-        Save
-      </Button>
+      {!!token && (
+        <Button className="bg-primary my-3 text-white" type="submit">
+          Save
+        </Button>
+      )}
 
       {(isPending || imagePending) && <Loading absolute />}
 

@@ -60,21 +60,14 @@ const BookList = () => {
                 <td>{book.language}</td>
                 <td>{book?.descript_auth}</td>
                 <td>{book.date_written}</td>
-                {!!token && (
-                  <td>
-                    <Link
-                      to={`/admin/list/${book?.id}`}
-                      id="edit_item"
-                      className="text-blue-500"
-                    >
-                      <img
-                        className={"h-4 w-4 cursor-pointer"}
-                        src="/assets/icons/edit.svg"
-                        alt="edit"
-                      />
-                    </Link>
-                  </td>
-                )}
+                <td className="!w-8">
+                  <Link
+                    to={`/list/${book?.id}`}
+                    className="text-blue-500 underline"
+                  >
+                    more
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>

@@ -38,18 +38,17 @@ const App = () => {
                 <Route element={<SearchTome />} path={"tome-search"} />
                 <Route element={<DetailedSearch />} path={"detailed-search"} />
                 <Route element={<Login />} path={"login"} />
-                <Route element={<BookList />} path={"list"} />
               </Route>
             ) : (
               // admin routes
               <Route path={"/admin"}>
                 <Route element={<EditAddBook />} path={"add"} />
-                <Route element={<EditAddBook />} path={"list/:id"} />
-                <Route element={<BookList />} index path={"list"} />
                 <Route element={<Search />} path={"search"} />
                 <Route element={<DetailedSearch />} path={"filter"} />
               </Route>
             )}
+            <Route element={<EditAddBook />} path={"/list/:id"} />
+            <Route element={<BookList />} path={"/list"} />
           </Routes>
         </div>
       </Card>

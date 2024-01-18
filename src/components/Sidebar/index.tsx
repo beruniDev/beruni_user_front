@@ -25,7 +25,7 @@ const routes = [
   },
   {
     name: "List",
-    url: "/users/list",
+    url: "/list",
   },
 ];
 
@@ -52,7 +52,7 @@ const adminRoutes = [
   },
   {
     name: "List",
-    url: "/admin/list",
+    url: "/list",
   },
 ];
 
@@ -72,7 +72,7 @@ const Sidebar = () => {
 
   return (
     <div className={cl(styles.block, { [styles.open]: active })}>
-      <div className="order-2">
+      <div className="order-2 flex md:hidden">
         <div className="cursor-pointer h-5 w-5 -mt-3 " onClick={toggleActive}>
           {!active ? (
             <img

@@ -34,10 +34,10 @@
 }
 .block {
   display: flex;
-  position: absolute;
   z-index: 100;
   transition: 0.3s all ease-in-out;
   @media (max-width: 920px) {
+    position: absolute;
     transform: translateX(-280px);
     width: 0;
   }
