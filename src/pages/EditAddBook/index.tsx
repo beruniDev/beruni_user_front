@@ -117,7 +117,7 @@ const EditAddBook = () => {
   const { register, reset, getValues, handleSubmit, watch, setValue } =
     useForm();
   const [images, $images] = useState<string[]>([]);
-  const { data } = useBooks({ id, enabled: !!id });
+  const { data, refetch } = useBooks({ id, enabled: !!id });
   const token = useAppSelector(tokenSelector);
 
   const book = data?.items?.[0];
@@ -145,6 +145,7 @@ const EditAddBook = () => {
         onSuccess: () => {
           successToast("success");
           navigate("/list");
+          if (!!id) refetch();
         },
         onError: (e) => errorToast(e.message),
       }
