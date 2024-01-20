@@ -22,7 +22,90 @@ import {
   detectFileType,
   inputnames,
 } from "src/utils/helpers";
-import { errorToast } from "src/utils/toast";
+import { errorToast, successToast } from "src/utils/toast";
+
+const tableArr = [
+  { name: "Inv. №", id: 1 },
+  {
+    name: "Title",
+    id: 2,
+    child: [
+      { name: "Title", id: 1 },
+      { name: "Title as in manuscript", id: 2 },
+      { name: "Known also as", id: 3 },
+    ],
+  },
+  {
+    name: "Author",
+    id: 3,
+    child: [
+      { name: "Author (name)", id: 1 },
+      { name: "Author (name) as in manuscript", id: 2 },
+      { name: "Commentator", id: 3 },
+      { name: "Commentator as in manuscript", id: 4 },
+      { name: "Translator", id: 5 },
+      {
+        name: "Translator (name) as In manuscript",
+        id: 6,
+      },
+      { name: "Compiler", id: 7 },
+      {
+        name: "Compiler (name) as in manuscript",
+        id: 8,
+      },
+    ],
+  },
+  { name: "Date of writing", id: 4 },
+  { name: "Language", id: 5 },
+  { name: "Subject", id: 6 },
+  {
+    name: "Quantity of sheets",
+    id: 7,
+    child: [
+      { name: "Quantity of sheets", id: 1 },
+      { name: "Available illustration", id: 2 },
+    ],
+  },
+  {
+    name: "Lines",
+    id: 8,
+    child: [
+      { name: "Quantity of lines", id: 1 },
+      { name: "Quantity of columns", id: 2 },
+    ],
+  },
+  { name: "Size", id: 9 },
+  { name: "Paper", id: 10 },
+  { name: "Copyist", id: 11 },
+  {
+    name: "Date, Place of Copying",
+    id: 12,
+    child: [
+      { name: "Date of Copying", id: 1 },
+      { name: "Place of Copying", id: 2 },
+    ],
+  },
+  { name: "Handwriting kind", id: 13 },
+  { name: "Cover", id: 14 },
+  { name: "Cover color", id: 15 },
+  { name: "Stamp of bookbinder", id: 16 },
+  {
+    name: "Text (partly)",
+    id: 17,
+    child: [
+      { name: "Beginning", id: 1 },
+      { name: "The existing beginning", id: 2 },
+      { name: "Beginning after amma ba'd", id: 3 },
+      { name: "End", id: 4 },
+      { name: "The existing end", id: 5 },
+      { name: "Colophon", id: 6 },
+    ],
+  },
+  { name: "Defects", id: 18 },
+  { name: "Fixation in CBP", id: 19 },
+  { name: "Note", id: 20 },
+  { name: "Author of description", id: 21 },
+];
 
 const EditAddBook = () => {
   const { id } = useParams();
@@ -36,93 +119,6 @@ const EditAddBook = () => {
   const [images, $images] = useState<string[]>([]);
   const { data } = useBooks({ id, enabled: !!id });
   const token = useAppSelector(tokenSelector);
-
-  const tableArr = useMemo(() => {
-    return [
-      { name: "Inv. №", id: 1, disabled: !token },
-      {
-        name: "Title",
-        id: 2,
-        child: [
-          { name: "Title", id: 1, disabled: !token },
-          { name: "Title as in manuscript", id: 2, disabled: !token },
-          { name: "Known also as", id: 3, disabled: !token },
-        ],
-      },
-      {
-        name: "Author",
-        id: 3,
-        child: [
-          { name: "Author (name)", id: 1, disabled: !token },
-          { name: "Author (name) as in manuscript", id: 2, disabled: !token },
-          { name: "Commentator", id: 3, disabled: !token },
-          { name: "Commentator as in manuscript", id: 4, disabled: !token },
-          { name: "Translator", id: 5, disabled: !token },
-          {
-            name: "Translator (name) as In manuscript",
-            id: 6,
-            disabled: !token,
-          },
-          { name: "Compiler", id: 7, disabled: !token },
-          {
-            name: "Compiler (name) as in manuscript",
-            id: 8,
-            disabled: !token,
-          },
-        ],
-      },
-      { name: "Date of writing", id: 4, disabled: !token },
-      { name: "Language", id: 5, disabled: !token },
-      { name: "Subject", id: 6, disabled: !token },
-      {
-        name: "Quantity of sheets",
-        id: 7,
-        child: [
-          { name: "Quantity of sheets", id: 1, disabled: !token },
-          { name: "Available illustration", id: 2, disabled: !token },
-        ],
-      },
-      {
-        name: "Lines",
-        id: 8,
-        child: [
-          { name: "Quantity of lines", id: 1, disabled: !token },
-          { name: "Quantity of columns", id: 2, disabled: !token },
-        ],
-      },
-      { name: "Size", id: 9, disabled: !token },
-      { name: "Paper", id: 10, disabled: !token },
-      { name: "Copyist", id: 11, disabled: !token },
-      {
-        name: "Date, Place of Copying",
-        id: 12,
-        child: [
-          { name: "Date of Copying", id: 1, disabled: !token },
-          { name: "Place of Copying", id: 2, disabled: !token },
-        ],
-      },
-      { name: "Handwriting kind", id: 13, disabled: !token },
-      { name: "Cover", id: 14, disabled: !token },
-      { name: "Cover color", id: 15, disabled: !token },
-      { name: "Stamp of bookbinder", id: 16, disabled: !token },
-      {
-        name: "Text (partly)",
-        id: 17,
-        child: [
-          { name: "Beginning", id: 1, disabled: !token },
-          { name: "The existing beginning", id: 2, disabled: !token },
-          { name: "Beginning after amma ba'd", id: 3, disabled: !token },
-          { name: "End", id: 4, disabled: !token },
-          { name: "The existing end", id: 5, disabled: !token },
-          { name: "Colophon", id: 6, disabled: !token },
-        ],
-      },
-      { name: "Defects", id: 18, disabled: !token },
-      { name: "Fixation in CBP", id: 19, disabled: !token },
-      { name: "Note", id: 20, disabled: !token },
-      { name: "Author of description", id: 21, disabled: !token },
-    ];
-  }, []);
 
   const book = data?.items?.[0];
 
@@ -140,15 +136,19 @@ const EditAddBook = () => {
       }
       return acc;
     }, {});
-    body.images = images?.toString();
+    body.id = id;
     !!getValues("file") && (body.file = getValues("file")[0]);
 
-    mutate(body, {
-      onSuccess: () => {
-        navigate("/list");
-      },
-      onError: (e) => errorToast(e.message),
-    });
+    mutate(
+      { body, params: images },
+      {
+        onSuccess: () => {
+          successToast("success");
+          navigate("/list");
+        },
+        onError: (e) => errorToast(e.message),
+      }
+    );
   };
 
   const closeModal = () => removeParams(["photo"]);
@@ -162,6 +162,7 @@ const EditAddBook = () => {
     }
     fileUpload(formData, {
       onSuccess: (data) => $images((prev) => [...prev, ...data?.files]),
+      onError: (e) => errorToast(e.message),
     });
   };
 
@@ -181,16 +182,18 @@ const EditAddBook = () => {
         <div className="flex gap-2 w-full flex-wrap mt-4">
           {images.map((image, idx) => (
             <div className="relative h-36 w-36" key={image + idx}>
-              <div
-                className="border border-white rounded-full cursor-pointer bg-black absolute top-1 right-1 w-7 h-7 flex items-center justify-center"
-                onClick={handleFileDelete(idx)}
-              >
-                <img
-                  src="/assets/icons/clear.svg"
-                  alt="delete"
-                  className="h-3 w-3"
-                />
-              </div>
+              {!!token && (
+                <div
+                  className="border border-white rounded-full cursor-pointer bg-black absolute top-1 right-1 w-7 h-7 flex items-center justify-center"
+                  onClick={handleFileDelete(idx)}
+                >
+                  <img
+                    src="/assets/icons/clear.svg"
+                    alt="delete"
+                    className="h-3 w-3"
+                  />
+                </div>
+              )}
               <div onClick={handleShowPhoto(image)}>
                 <img
                   src={`${baseURL}/${image}`}
@@ -203,7 +206,7 @@ const EditAddBook = () => {
           ))}
         </div>
       );
-  }, [images]);
+  }, [images, token]);
 
   const renderModal = useMemo(() => {
     return (
@@ -272,7 +275,7 @@ const EditAddBook = () => {
                   <td colSpan={3} className="p-0 relative">
                     <TranparentInput
                       register={register(`${item.id}`, {
-                        disabled: item.disabled,
+                        disabled: !token,
                       })}
                     />
                   </td>
@@ -294,7 +297,7 @@ const EditAddBook = () => {
                       <TranparentInput
                         // type={item.child?.[0]?.inputType}
                         register={register(`${item.id}_${item.child[0].id}`, {
-                          disabled: item.disabled,
+                          disabled: !token,
                         })}
                       />
                     </td>
@@ -306,7 +309,7 @@ const EditAddBook = () => {
                       <td className="p-0 relative">
                         <TranparentInput
                           register={register(`${item.id}_${child.id}`, {
-                            disabled: item.disabled,
+                            disabled: !token,
                           })}
                         />
                       </td>
@@ -332,10 +335,7 @@ const EditAddBook = () => {
                     )}
                     {!!watch("file")?.length &&
                       typeof watch("file") === "object" && (
-                        <div
-                          // onClick={handleShowPhoto(book.file)}
-                          className="text-blue-500 flex-1"
-                        >
+                        <div className="text-blue-500 flex-1">
                           uploaded file
                         </div>
                       )}

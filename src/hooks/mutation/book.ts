@@ -53,11 +53,12 @@ const bookMutation = () => {
   const config = { timeout: 1000000 };
   return useMutation({
     mutationKey: ["post_book"],
-    mutationFn: async (body: bookBody) => {
+    mutationFn: async ({ body, params }: { body: bookBody; params: any }) => {
       if (body.id) {
         const { data } = await apiClient.put({
           url: "/books",
           body,
+          params,
           contentType,
           config,
         });
@@ -66,6 +67,7 @@ const bookMutation = () => {
         const { data } = await apiClient.post({
           url: "/books",
           body,
+          params,
           contentType,
           config,
         });

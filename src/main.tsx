@@ -13,6 +13,7 @@ import Loading from "./components/Loader/index.tsx";
 import "react-toastify/dist/ReactToastify.css";
 
 export const baseURL = "http://185.74.5.198:8002";
+// export const baseURL = "http://10.0.0.137:8000";
 export default new BaseAPIClient(baseURL, store);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

@@ -12,6 +12,16 @@ import { filterSelector } from "src/store/reducers/filter";
 import { useAppSelector } from "src/store/utils/types";
 import { handleIdx } from "src/utils/helpers";
 
+const column = [
+  { name: "№", key: "id" },
+  { name: "name", key: "purchaser" },
+  { name: "Author", key: "id" },
+  { name: "Language", key: "rate" },
+  { name: "Author of description", key: "status" },
+  { name: "Date of writing", key: "date" },
+  { name: "", key: "" },
+];
+
 const BookList = () => {
   const currentPage = Number(useQueryString("page")) || 1;
   const filter = useAppSelector(filterSelector);
@@ -25,20 +35,6 @@ const BookList = () => {
     page: currentPage,
     ...filter,
   });
-
-  const column = useMemo(() => {
-    const init = [
-      { name: "№", key: "id" },
-      { name: "name", key: "purchaser" },
-      { name: "Author", key: "id" },
-      { name: "Language", key: "rate" },
-      { name: "Author of description", key: "status" },
-      { name: "Date of writing", key: "date" },
-    ];
-    if (token) init.push({ name: "", key: "" });
-
-    return init;
-  }, []);
 
   useEffect(() => {
     refetch();
