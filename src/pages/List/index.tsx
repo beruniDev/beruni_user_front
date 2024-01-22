@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import EmptyList from "src/components/EmptyList";
 import ItemsCount from "src/components/ItemsCount";
@@ -7,7 +7,6 @@ import Pagination from "src/components/Pagination";
 import TableHead from "src/components/TableHead";
 import useBooks from "src/hooks/useBooks";
 import useQueryString from "src/hooks/useQueryString";
-import { tokenSelector } from "src/store/reducers/auth";
 import { filterSelector } from "src/store/reducers/filter";
 import { useAppSelector } from "src/store/utils/types";
 import { handleIdx } from "src/utils/helpers";
@@ -25,7 +24,6 @@ const column = [
 const BookList = () => {
   const currentPage = Number(useQueryString("page")) || 1;
   const filter = useAppSelector(filterSelector);
-  const token = useAppSelector(tokenSelector);
 
   const {
     data: books,

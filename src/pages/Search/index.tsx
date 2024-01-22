@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import BaseInput from "src/components/BaseInputs";
 import MainInput from "src/components/BaseInputs/MainInput";
 import Button from "src/components/Button";
+import EmptyList from "src/components/EmptyList";
+import ItemsCount from "src/components/ItemsCount";
 import Loading from "src/components/Loader";
+import Pagination from "src/components/Pagination";
 import TableHead from "src/components/TableHead";
 import Title from "src/components/Title";
 import useBookSearch from "src/hooks/useBookSearch";
@@ -58,34 +61,45 @@ const Search = () => {
         </Button>
       </div>
 
-      {!!books?.items?.length && (
-        <table className="w-full bordered my-4">
-          <TableHead column={column} />
-
-          <tbody>
-            {books?.items?.map((book, idx: number) => (
-              <tr key={idx} className="bg-blue">
-                <td width="40">{handleIdx(idx)}</td>
-                <td>{book.title}</td>
-                <td>{book?.author}</td>
+      <ItemsCount data={books} />
+      {!!books?.items?.length &&
+        books?.items?.map((book, idx: number) => (
+          <table className="bordered m-2">
+            <tbody>
+              <tr>
+                <td className="bg-transparent">
+                  <span className="bg-darkGray text-white font-bold px-3 py-1 ">
+                    {book.inventory_number}
+                  </span>
+                </td>
+                <td>some title</td>
+              </tr>
+              <tr className="bg-mainGray">
+                <td className="font-bold">Author name</td>
+                <td>محمد بن محمد جلال الدین الرومی</td>
+              </tr>
+              <tr className="bg-lightGray">
+                <td className="font-bold">Language</td>
                 <td>{book.language}</td>
-                <td>{book?.descript_auth}</td>
-                <td>{book.date_written}</td>
-
-                <td>
-                  <Link
-                    to={`/list/${book?.id}`}
-                    className="text-blue-500 underline"
-                  >
-                    more
-                  </Link>
+              </tr>
+              <tr>
+                <td className="bg-mainGray" colSpan={2}>
+                  <div className="flex w-full">
+                    <Link
+                      to={`/list/${book.id}`}
+                      className="text-blue-500 underline text-right flex-1 "
+                    >
+                      more information
+                    </Link>
+                  </div>
                 </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            </tbody>
+          </table>
+        ))}
 
+      {books?.total === 0 && <EmptyList />}
+      {!!books && <Pagination totalPages={books.pages} />}
       {(isLoading || isFetching) && <Loading absolute />}
     </div>
   );

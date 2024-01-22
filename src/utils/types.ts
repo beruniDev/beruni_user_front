@@ -80,6 +80,7 @@ export interface BookType {
   file: any;
   created_at: string;
   images: string[];
+  inventory_number: string;
 }
 export interface BookTypes extends BasePaginatedRes {
   items: BookType[];

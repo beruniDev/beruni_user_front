@@ -21,11 +21,11 @@ const ItemsCount = ({ data }: ItemsTypes) => {
 
   return (
     <div>
-      Показаны записи{" "}
+      Shown items{" "}
       <b>
         {indexOfFirstItem}-{indexOfLastItem === 0 ? 0 : indexOfLastItem}
       </b>{" "}
-      из <b>{total}</b>.
+      from <b>{total}</b>.
     </div>
   );
 };
