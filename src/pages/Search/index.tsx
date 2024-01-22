@@ -76,7 +76,7 @@ const Search = () => {
               </tr>
               <tr className="bg-mainGray">
                 <td className="font-bold">Author name</td>
-                <td>محمد بن محمد جلال الدین الرومی</td>
+                <td>{book.author}</td>
               </tr>
               <tr className="bg-lightGray">
                 <td className="font-bold">Language</td>
