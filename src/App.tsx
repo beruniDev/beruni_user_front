@@ -24,9 +24,10 @@ const App = () => {
   }, []);
 
   return (
-    <Container className="relative flex flex-col h-[100vh]">
+    <Container className="relative flex flex-col h-full">
+      {/* <img src="/assets/images/bg.png" alt="" /> */}
       <Header />
-      <Card className="flex p-2 h-[73vh] md:p-4 ">
+      <Card className="flex p-2 md:p-4 h-[73vh] min-h-[560px]">
         <Sidebar />
 
         <div className="w-full overflow-y-auto">

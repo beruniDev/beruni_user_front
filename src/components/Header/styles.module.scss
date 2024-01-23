@@ -1,0 +1,24 @@
+// w-full rounded-2xl border border-black bg-gray-100 h-[18vh] flex flex-1 overflow-hidden
+
+.block {
+  border-radius: 16px;
+  width: 100%;
+  border: 1px solid black;
+  background: var(--gray);
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  justify-content: space-between;
+}
+
+.leftImg {
+  width: 60px;
+  object-fit: contain;
+}
+
+.rightImg {
+  width: 400px;
+  height: 150px;
+  background-position: top;
+  object-fit: cover;
+}
