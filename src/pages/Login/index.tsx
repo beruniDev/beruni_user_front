@@ -34,7 +34,7 @@ const Login = () => {
         onSuccess: (data) => {
           dispatch(loginHandler(data.access_token));
           navigate("/admin/add");
-          successToast("Добро пожаловать");
+          successToast("Welcome");
           if (error) $error(false);
         },
         onError: () => $error(true),
@@ -43,13 +43,13 @@ const Login = () => {
   };
   return (
     <div className={cl("max-w-sm w-full mx-auto")}>
-      <h3 className="text-center mb-3">Авторизация</h3>
+      <h3 className="text-center mb-3">Log in</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <BaseInput className="mb-0" error={errors.username}>
           <MainInput
             register={register("username", { required: "required" })}
             autoFocus
-            placeholder={"Логин"}
+            placeholder={"Username"}
           />
         </BaseInput>
         <BaseInput className="mb-0" error={errors.password}>
@@ -57,17 +57,15 @@ const Login = () => {
             register={register("password", { required: "required" })}
             type="password"
             className={cl("mb-4")}
-            placeholder={"Пароль"}
+            placeholder={"Password"}
           />
           {error && (
-            <p className="text-danger">
-              Неправильное имя пользователя или пароль.
-            </p>
+            <p className="text-danger">Incorrect username or password</p>
           )}
         </BaseInput>
 
         <Button type="submit" className="bg-gray-300 w-full">
-          Логин
+          Submit
         </Button>
       </form>
     </div>

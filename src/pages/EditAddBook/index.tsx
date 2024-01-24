@@ -118,7 +118,10 @@ const EditAddBook = () => {
   const { register, reset, getValues, handleSubmit, watch, setValue } =
     useForm();
   const [images, $images] = useState<string[]>([]);
-  const { data, refetch } = useBooks({ id, enabled: !!id });
+  const { data, refetch, isLoading, isFetching } = useBooks({
+    id,
+    enabled: !!id,
+  });
   const token = useAppSelector(tokenSelector);
 
   const book = data?.items?.[0];
@@ -266,6 +269,8 @@ const EditAddBook = () => {
     if (!id) $images([]);
   }, [pathname]);
 
+  if (isLoading || isFetching || isPending) return <Loading absolute />;
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="relative">
       {!!id && (
@@ -275,8 +280,11 @@ const EditAddBook = () => {
           </Link>
         </Title>
       )}
-      {/* <img src="/assets/images/main_bg.png" alt="" className="fixed z-[-1]" /> */}
-      <table className="bordered w-full">
+      <div className="fixed opacity-25 flex z-0 left-1/2 top-1/2 -translate-x-1/3 -translate-y-1/2">
+        <div className="w-[350px] h-full flex" />
+        <img src="/assets/images/main_bg.png" alt="" className="" />
+      </div>
+      <table className="bordered w-full z-10">
         <tbody>
           {tableArr.map((item) => {
             if (!item.child?.length)
