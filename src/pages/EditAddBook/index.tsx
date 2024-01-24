@@ -1,9 +1,10 @@
 import { ChangeEvent, Fragment, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Button from "src/components/Button";
 import Loading from "src/components/Loader";
 import Modal from "src/components/Modal";
+import Title from "src/components/Title";
 import TranparentInput from "src/components/TranparentInput";
 import bookMutation from "src/hooks/mutation/book";
 import filesMutation from "src/hooks/mutation/files";
@@ -264,8 +265,16 @@ const EditAddBook = () => {
     if (!id) Object.keys(getValues()).forEach((item) => setValue(item, ""));
     if (!id) $images([]);
   }, [pathname]);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {!!id && (
+        <Title className="mb-4" title={"Description"}>
+          <Link className="text-blue-500 underline" to={`/print/${id}`}>
+            Print
+          </Link>
+        </Title>
+      )}
       <table className="bordered w-full">
         <tbody>
           {tableArr.map((item) => {

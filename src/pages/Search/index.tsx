@@ -64,7 +64,7 @@ const Search = () => {
       <ItemsCount data={books} />
       {!!books?.items?.length &&
         books?.items?.map((book, idx: number) => (
-          <table className="bordered m-2">
+          <table key={book.inventory_number + idx} className="bordered my-2">
             <tbody>
               <tr>
                 <td className="bg-transparent">

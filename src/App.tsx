@@ -14,6 +14,7 @@ import { useAppSelector } from "./store/utils/types";
 import { tokenSelector } from "./store/reducers/auth";
 import EditAddBook from "./pages/EditAddBook";
 import BookList from "./pages/List";
+import PrintComponent from "./components/PrintComponent";
 
 const App = () => {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ const App = () => {
             )}
             <Route element={<EditAddBook />} path={"/list/:id"} />
             <Route element={<BookList />} path={"/list"} />
+            <Route element={<PrintComponent />} path={"/print/:id"} />
           </Routes>
         </div>
       </Card>
