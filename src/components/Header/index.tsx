@@ -1,10 +1,22 @@
+import styles from "./styles.module.scss";
+
 const Header = () => {
   return (
-    <div className="w-full rounded-2xl border border-black bg-gray-100 h-[18vh]">
+    <div className={styles.block}>
       <img
-        src="/assets/images/logo.png"
+        src="/assets/images/beruni_logo.png"
         alt="logo-image"
-        className="h-full object-contain"
+        className={styles.leftImg}
+      />
+      <div className="">
+        <h1>HERITAGE OF BIRUNI</h1>
+        <h2>AL - BIRUNI INSTITUTE OF ORIENTAL STUDIES</h2>
+      </div>
+
+      <img
+        src="/assets/images/institute_img.png"
+        alt="logo-image"
+        className={styles.rightImg}
       />
     </div>
   );
