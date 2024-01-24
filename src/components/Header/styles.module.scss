@@ -9,16 +9,28 @@
   flex: 1;
   overflow: hidden;
   justify-content: space-between;
+  align-items: center;
 }
 
+// font-family: Bruno Ace SC!important;
+
 .leftImg {
-  width: 60px;
+  width: 80px;
+  height: 100%;
   object-fit: contain;
+  margin-left: 30px;
 }
 
 .rightImg {
   width: 400px;
-  height: 150px;
+  height: 100px;
   background-position: top;
   object-fit: cover;
+}
+.capital {
+  font-weight: 800;
+  font-size: 20px;
+}
+.middle {
+  font-family: "Bruno Ace SC" !important;
 }

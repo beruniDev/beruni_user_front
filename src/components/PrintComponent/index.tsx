@@ -1,17 +1,25 @@
 import { useParams } from "react-router-dom";
 import useBooks from "src/hooks/useBooks";
 import Loading from "../Loader";
+import { useEffect } from "react";
+import "./index.scss";
 
 const PrintComponent = () => {
   const { id } = useParams();
   const { data, isLoading } = useBooks({ id, enabled: !!id });
   const book = data?.items?.[0];
 
+  useEffect(() => {
+    setTimeout(() => {
+      window.print();
+    }, 400);
+  }, []);
+
   if (isLoading) return <Loading absolute />;
 
   return (
-    <div className="absolute inset-0 bg-gray-500 z-[10001]">
-      <table className="w-[1000px] bordered">
+    <div className="fixed inset-0 bg-gray-500 z-[10001] overflow-auto printing-block">
+      <table className="w-[700px] bordered h-full  bg-white">
         <tbody>
           <tr>
             <th>Inventory number</th>
@@ -125,6 +133,8 @@ const PrintComponent = () => {
             <th></th>
             <td className="text-right">{book?.inventory_number}</td>
           </tr>
+
+          {/* <button onClick={() => window.print()}>print</button> */}
         </tbody>
       </table>
     </div>

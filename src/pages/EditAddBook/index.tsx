@@ -267,7 +267,7 @@ const EditAddBook = () => {
   }, [pathname]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="relative">
       {!!id && (
         <Title className="mb-4" title={"Description"}>
           <Link className="text-blue-500 underline" to={`/print/${id}`}>
@@ -275,6 +275,7 @@ const EditAddBook = () => {
           </Link>
         </Title>
       )}
+      {/* <img src="/assets/images/main_bg.png" alt="" className="fixed z-[-1]" /> */}
       <table className="bordered w-full">
         <tbody>
           {tableArr.map((item) => {

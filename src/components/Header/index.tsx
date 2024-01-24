@@ -8,9 +8,15 @@ const Header = () => {
         alt="logo-image"
         className={styles.leftImg}
       />
-      <div className="">
-        <h1>HERITAGE OF BIRUNI</h1>
-        <h2>AL - BIRUNI INSTITUTE OF ORIENTAL STUDIES</h2>
+      <div className={styles.middle}>
+        <h1 className="text-2xl font-bold">HERITAGE OF BIRUNI</h1>
+        <h2>
+          <span className={styles.capital}>A</span>L -{" "}
+          <span className={styles.capital}>B</span>IRUNI{" "}
+          <span className={styles.capital}>I</span>NSTITUTE OF
+          <span className={styles.capital}> O</span>RIENTAL{" "}
+          <span className={styles.capital}>S</span>TUDIES
+        </h2>
       </div>
 
       <img
