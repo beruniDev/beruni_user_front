@@ -9,7 +9,7 @@ const Header = () => {
         className={styles.leftImg}
       />
       <div className={styles.middle}>
-        <h1 className="md:text-2xl text-[10px] font-bold">
+        <h1 className="md:text-2xl text-[10px] font-bold text-center">
           HERITAGE OF BIRUNI
         </h1>
         <h2 className="text-[8px] md:text-base">
