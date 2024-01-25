@@ -29,7 +29,7 @@ const App = () => {
       <img
         src="/assets/images/bg.png"
         alt="background-image"
-        className="z-0 fixed opacity-10 inset-0"
+        className="z-0 fixed opacity-20 inset-0"
       />
       <Container className="relative flex flex-col h-full justify-between">
         {/* <img src="/assets/images/bg.png" alt="" /> */}
