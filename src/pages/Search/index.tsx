@@ -48,7 +48,7 @@ const Search = () => {
   };
 
   return (
-    <div className="flex flex-1 flex-col p-1">
+    <div className="flex flex-1 flex-col p-1 withBg">
       <Title title="Search" />
 
       <div className="mt-10 flex gap-4 md:flex-row flex-col">

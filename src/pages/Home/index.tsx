@@ -1,8 +1,6 @@
-import styles from "./index.module.scss";
-
 const Home = () => {
   return (
-    <div className={styles.block}>
+    <div className={"withBg "}>
       <div className="absolute inset-0 z-10 overflow-y-auto">
         The Al-Beruni Institute of Oriental Studies of Uzbekistan of Academy of
         Sciences has a collection of oriental manuscripts which can well match

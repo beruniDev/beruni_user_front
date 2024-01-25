@@ -25,16 +25,16 @@ const App = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative inset-0">
       <img
         src="/assets/images/bg.png"
         alt="background-image"
         className="z-0 fixed opacity-10 inset-0"
       />
-      <Container className="relative flex flex-col h-full ">
+      <Container className="relative flex flex-col h-full justify-between">
         {/* <img src="/assets/images/bg.png" alt="" /> */}
         <Header />
-        <Card className="flex p-2 md:p-4 h-[81vh] min-h-[560px]">
+        <Card className="flex p-2 md:p-4 md:h-[81vh] h-[75vh] md:min-h-[560px]">
           <Sidebar />
 
           <div className="w-full overflow-y-auto">

@@ -53,6 +53,12 @@ td,
 th {
   padding: 7px 5px;
   min-width: 120px;
+
+  @media (max-width: 760px) {
+    padding: 3px 2px;
+    max-width: 100px !important;
+    min-width: initial;
+  }
 }
 
 .bordered {
@@ -71,5 +77,35 @@ th {
   border-right: 1px solid black;
   &:last-of-type {
     border-right: 1px solid black;
+  }
+}
+.withBg {
+  position: relative;
+  max-width: 100%;
+  z-index: 0;
+  height: 100%;
+  inset: 0;
+
+  &::before {
+    content: "";
+    display: block;
+    position: fixed;
+    background: url("/assets/images/main_bg.png") center;
+    opacity: 0.4;
+    background-repeat: no-repeat;
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+
+    @media (max-width: 760px) {
+      inset: 0;
+      // max-width: 300px;
+      transform: none;
+    }
   }
 }

@@ -9,8 +9,10 @@ const Header = () => {
         className={styles.leftImg}
       />
       <div className={styles.middle}>
-        <h1 className="text-2xl font-bold">HERITAGE OF BIRUNI</h1>
-        <h2>
+        <h1 className="md:text-2xl text-[10px] font-bold">
+          HERITAGE OF BIRUNI
+        </h1>
+        <h2 className="text-[8px] md:text-base">
           <span className={styles.capital}>A</span>L -{" "}
           <span className={styles.capital}>B</span>IRUNI{" "}
           <span className={styles.capital}>I</span>NSTITUTE OF

@@ -35,9 +35,9 @@ const DetailedSearch = () => {
   }, []);
 
   return (
-    <div className="flex flex-1 flex-col p-1">
+    <div className="flex flex-1 flex-col p-1 withBg">
       <Title title={!token ? "Detailed search" : "Filter"} />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="z-10" onSubmit={handleSubmit(onSubmit)}>
         <table className="bordered w-full mt-4">
           <tbody>
             <tr>

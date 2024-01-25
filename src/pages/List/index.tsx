@@ -39,9 +39,9 @@ const BookList = () => {
   }, []);
 
   return (
-    <div className="content mb-4">
+    <div className="content md:mb-4 withBg">
       <ItemsCount data={books} />
-      <table className="w-full bordered mb-4">
+      <table className="w-full bordered mb-4 z-10">
         <TableHead column={column} />
 
         {!!books?.items?.length && (

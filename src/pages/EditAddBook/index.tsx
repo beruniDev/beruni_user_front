@@ -199,10 +199,11 @@ const EditAddBook = () => {
                   />
                 </div>
               )}
-              <div onClick={handleShowPhoto(image)}>
+              <div onClick={handleShowPhoto(image)} className="h-full">
                 <img
                   src={`${baseURL}/${image}`}
                   alt="image"
+                  className="object-cover h-full w-full"
                   height={150}
                   width={150}
                 />
@@ -280,9 +281,9 @@ const EditAddBook = () => {
           </Link>
         </Title>
       )}
-      <div className="fixed opacity-25 flex z-0 left-1/2 top-1/2 -translate-x-1/3 -translate-y-1/2">
-        <div className="w-[350px] h-full flex" />
-        <img src="/assets/images/main_bg.png" alt="" className="" />
+      <div className="fixed opacity-25 flex -z-10 left-1/2 md:top-[60%] top-1/2 md:-translate-x-1/3 -translate-y-1/2 -translate-x-1/2">
+        <div className="w-[350px] h-full md:flex hidden" />
+        <img src="/assets/images/main_bg.png" alt="" className="-z-10" />
       </div>
       <table className="bordered w-full z-10">
         <tbody>
@@ -343,7 +344,7 @@ const EditAddBook = () => {
               <tr>
                 <th colSpan={2}>File upload</th>
                 <td colSpan={2}>
-                  <div className="flex">
+                  <div className="flex flex-wrap flex-1 flex-col md:flex-row gap-2 overflow-hidden">
                     {!!book?.file && !!id && (
                       <div
                         onClick={handleShowPhoto(book.file)}
@@ -369,8 +370,13 @@ const EditAddBook = () => {
               </tr>
               <tr>
                 <th colSpan={2}>Image upload</th>
-                <td colSpan={2}>
-                  <input type="file" multiple onChange={handleImages} />
+                <td colSpan={2} className="overflow-hidden">
+                  <input
+                    type="file"
+                    multiple
+                    onChange={handleImages}
+                    className="flex flex-wrap"
+                  />
                 </td>
               </tr>
             </>

@@ -7,18 +7,25 @@
   background: transparent;
   display: flex;
   flex: 1;
+  z-index: 1;
   overflow: hidden;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 760px) {
+    height: 15vh;
+  }
 }
-
-// font-family: Bruno Ace SC!important;
 
 .leftImg {
   width: 80px;
   height: 100%;
   object-fit: contain;
   margin-left: 30px;
+
+  @media (max-width: 760px) {
+    width: 30px;
+    margin-left: 10px;
+  }
 }
 
 .rightImg {
@@ -26,11 +33,21 @@
   height: 100px;
   background-position: top;
   object-fit: cover;
+
+  @media (max-width: 760px) {
+    width: 120px;
+    height: 80px;
+  }
 }
 .capital {
   font-weight: 800;
   font-size: 20px;
+
+  @media (max-width: 760px) {
+    font-size: 10px;
+  }
 }
 .middle {
   font-family: "Bruno Ace SC" !important;
+  margin: 10px;
 }
