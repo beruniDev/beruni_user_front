@@ -72,6 +72,11 @@ const Sidebar = () => {
 
   return (
     <div className={cl(styles.block, { [styles.open]: active })}>
+      <img
+        src="/assets/images/beruni_logo.png"
+        alt=""
+        className="absolute z-0 opacity-20 top-1/2 -translate-y-1/2 -translate-x-[60%] left-1/2 "
+      />
       <div className="order-2 flex md:hidden">
         <div className="cursor-pointer h-5 w-5 -mt-3 " onClick={toggleActive}>
           {!active ? (

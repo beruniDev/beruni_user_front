@@ -35,6 +35,7 @@
 .block {
   display: flex;
   z-index: 100;
+  position: relative;
   transition: 0.3s all ease-in-out;
   @media (max-width: 920px) {
     position: absolute;

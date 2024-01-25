@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div className={styles.block}>
       <img
-        src="/assets/images/beruni_logo.png"
+        src="/assets/images/main_bg.png"
         alt="logo-image"
         className={styles.leftImg}
       />

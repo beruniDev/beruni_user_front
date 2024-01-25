@@ -25,13 +25,15 @@ const App = () => {
   }, []);
 
   return (
-    <div className="relative inset-0">
-      <img
+    <>
+      <div className="relative inset-0 main_body" />
+
+      {/* <img
         src="/assets/images/bg.png"
         alt="background-image"
-        className="z-0 fixed opacity-20 inset-0"
-      />
-      <Container className="relative flex flex-col h-full justify-between">
+        className="z-0 fixed opacity-20 inset-0 bg-repeat w-full h-full object-fill"
+      /> */}
+      <Container className="relative flex flex-col h-full justify-between z-10">
         {/* <img src="/assets/images/bg.png" alt="" /> */}
         <Header />
         <Card className="flex p-2 md:p-4 md:h-[81vh] h-[75vh] md:min-h-[560px]">
@@ -66,7 +68,7 @@ const App = () => {
         </Card>
         <Footer />
       </Container>
-    </div>
+    </>
   );
 };
 
