@@ -38,7 +38,7 @@ const DetailedSearch = () => {
     <div className="flex flex-1 flex-col p-1 withBg">
       <Title title={!token ? "Detailed search" : "Filter"} />
       <form className="z-10" onSubmit={handleSubmit(onSubmit)}>
-        <table className="bordered w-full mt-4">
+        <table className="bordered w-full mt-4 shadowed">
           <tbody>
             <tr>
               <th className="md:w-[300px] w-40">Inventory number:</th>

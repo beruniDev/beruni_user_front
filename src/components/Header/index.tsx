@@ -1,8 +1,9 @@
+import cl from "classnames";
 import styles from "./styles.module.scss";
 
 const Header = () => {
   return (
-    <div className={styles.block}>
+    <div className={cl(styles.block, "shadowed")}>
       <img
         src="/assets/images/main_bg.png"
         alt="logo-image"

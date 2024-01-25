@@ -36,7 +36,7 @@ const App = () => {
       <Container className="relative flex flex-col h-full justify-between z-10">
         {/* <img src="/assets/images/bg.png" alt="" /> */}
         <Header />
-        <Card className="flex p-2 md:p-4 md:h-[81vh] h-[75vh] md:min-h-[560px]">
+        <Card className="flex p-2 md:p-4 md:h-[81vh] h-[75vh] md:min-h-[560px] shadowed">
           <Sidebar />
 
           <div className="w-full overflow-y-auto">
