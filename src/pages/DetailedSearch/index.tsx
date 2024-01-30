@@ -38,46 +38,49 @@ const DetailedSearch = () => {
     <div className="flex flex-1 flex-col p-1 withBg">
       <Title title={!token ? "Detailed search" : "Filter"} />
       <form className="z-10" onSubmit={handleSubmit(onSubmit)}>
-        <table className="bordered w-full mt-4 shadowed">
-          <tbody>
-            <tr>
-              <th className="md:w-[300px] w-40">Inventory number:</th>
-              <td className="p-0 relative">
-                <TranparentInput register={register("inventory_number")} />
-              </td>
-            </tr>
-            <tr>
-              <th>Title:</th>
-              <td className="p-0 relative">
-                <TranparentInput register={register("title")} />
-              </td>
-            </tr>
-            <tr>
-              <th>Author name:</th>
-              <td className="p-0 relative">
-                <TranparentInput register={register("author")} />
-              </td>
-            </tr>
-            <tr>
-              <th>Language:</th>
-              <td className="p-0 relative">
-                <TranparentInput register={register("language")} />
-              </td>
-            </tr>
-            <tr>
-              <th>Subject:</th>
-              <td className="p-0 relative">
-                <TranparentInput register={register("subjects")} />
-              </td>
-            </tr>
-            <tr>
-              <th>Illustartion:</th>
-              <td className="p-0 relative">
-                <TranparentInput register={register("quantity_ill")} />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="relative">
+          <div className="absolute inset-0 bg-white opacity-50 z-[-1]" />
+          <table className="bordered w-full mt-4 shadowed ">
+            <tbody>
+              <tr>
+                <th className="md:w-[300px] w-40">Inventory number:</th>
+                <td className="p-0 relative">
+                  <TranparentInput register={register("inventory_number")} />
+                </td>
+              </tr>
+              <tr>
+                <th>Title:</th>
+                <td className="p-0 relative">
+                  <TranparentInput register={register("title")} />
+                </td>
+              </tr>
+              <tr>
+                <th>Author name:</th>
+                <td className="p-0 relative">
+                  <TranparentInput register={register("author")} />
+                </td>
+              </tr>
+              <tr>
+                <th>Language:</th>
+                <td className="p-0 relative">
+                  <TranparentInput register={register("language")} />
+                </td>
+              </tr>
+              <tr>
+                <th>Subject:</th>
+                <td className="p-0 relative">
+                  <TranparentInput register={register("subjects")} />
+                </td>
+              </tr>
+              <tr>
+                <th>Illustartion:</th>
+                <td className="p-0 relative">
+                  <TranparentInput register={register("quantity_ill")} />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div className="mt-6 flex gap-4">
           <Button type="submit" className="bg-gray-300">
             Apply
