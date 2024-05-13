@@ -15,7 +15,7 @@ const SearchTome = () => {
           <MainInput register={register("search")} />
         </BaseInput>
 
-        <Button className="bg-gray-300 w-full md:w-52">Search</Button>
+        <Button className="w-full md:w-52">Search</Button>
       </div>
     </div>
   );

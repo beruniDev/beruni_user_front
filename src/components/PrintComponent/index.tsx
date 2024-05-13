@@ -15,7 +15,7 @@ const PrintComponent = () => {
     }, 400);
   }, []);
 
-  if (isLoading) return <Loading absolute />;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="fixed inset-0 bg-gray-500 z-[10001] overflow-auto printing-block">

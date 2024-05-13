@@ -9,7 +9,7 @@ const UsersView = () => {
 
   const book = data?.items?.[0];
 
-  if (isLoading) return <Loading absolute />;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="">

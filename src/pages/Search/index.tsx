@@ -56,7 +56,7 @@ const Search = () => {
           <MainInput onChange={handleChange} onKeyDown={handleKeyDown} />
         </BaseInput>
 
-        <Button className="bg-gray-300 w-full md:w-52" onClick={onSubmit}>
+        <Button className="w-full md:w-52" onClick={onSubmit}>
           Search
         </Button>
       </div>
@@ -100,7 +100,7 @@ const Search = () => {
 
       {books?.total === 0 && <EmptyList />}
       {!!books && <Pagination totalPages={books.pages} />}
-      {(isLoading || isFetching) && <Loading absolute />}
+      {(isLoading || isFetching) && <Loading />}
     </div>
   );
 };

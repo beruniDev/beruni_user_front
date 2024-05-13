@@ -85,41 +85,16 @@ th {
   z-index: 0;
   height: 100%;
   inset: 0;
-
-  &::before {
-    content: "";
-    display: block;
-    position: fixed;
-    background: url("/assets/images/library.png") center;
-    opacity: 0.4;
-    background-repeat: no-repeat;
-    object-fit: contain;
-    height: 60%;
-    width: 60%;
-    z-index: -1;
-    border-radius: 20px;
-
-    top: 60%;
-    left: 50%;
-    transform: translate(-40%, -50%);
-
-    @media (max-width: 760px) {
-      inset: 0;
-      // max-width: 300px;
-      transform: none;
-    }
-  }
-}
-.main_body {
-  background: url("/assets/images/bg.png");
-  opacity: 0.35;
-  position: fixed;
-  inset: 0;
-  z-index: 0;
 }
 
 .shadowed {
   -webkit-box-shadow: 0px 9px 31px 14px rgba(34, 60, 80, 0.18);
   -moz-box-shadow: 0px 9px 31px 14px rgba(34, 60, 80, 0.18);
   box-shadow: 0px 9px 31px 14px rgba(34, 60, 80, 0.18);
+}
+
+.content {
+  background: #f4f0e8;
+  padding: 10px;
+  border-radius: 10px;
 }

@@ -41,7 +41,7 @@ const TableHead: FC<Props> = ({ column, children, data, onSort }) => {
           {column.map(({ name, key }) => (
             <th
               onClick={handleSort(key)}
-              className={"bg-primary text-white"}
+              className={"bg-mainBrown text-white"}
               key={name + key}
             >
               {name}{" "}

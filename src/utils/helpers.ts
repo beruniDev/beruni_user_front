@@ -119,6 +119,8 @@ export enum FileType {
   photo = "photo",
 }
 
+export const isMobile = window.innerWidth < 960;
+
 export const detectFileType = (url: string) => {
   const extension = url.split(".").pop()?.toLowerCase();
   const imageExtensions = [

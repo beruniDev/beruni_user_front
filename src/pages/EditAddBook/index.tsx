@@ -270,7 +270,7 @@ const EditAddBook = () => {
     if (!id) $images([]);
   }, [pathname]);
 
-  if (isLoading || isFetching || isPending) return <Loading absolute />;
+  if (isLoading || isFetching || isPending) return <Loading />;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="relative">
@@ -392,7 +392,7 @@ const EditAddBook = () => {
         </Button>
       )}
 
-      {(isPending || imagePending) && <Loading absolute />}
+      {(isPending || imagePending) && <Loading />}
 
       {renderModal}
     </form>

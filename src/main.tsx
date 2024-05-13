@@ -19,7 +19,7 @@ export default new BaseAPIClient(baseURL, store);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
-    <PersistGate persistor={persistor} loading={<Loading absolute />}>
+    <PersistGate persistor={persistor} loading={<Loading />}>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <App />

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import MainInput from "src/components/BaseInputs/MainInput";
 import Button from "src/components/Button";
 import Title from "src/components/Title";
 import TranparentInput from "src/components/TranparentInput";
@@ -37,9 +38,65 @@ const DetailedSearch = () => {
   return (
     <div className="flex flex-1 flex-col p-1 withBg">
       <Title title={!token ? "Detailed search" : "Filter"} />
-      <form className="z-10" onSubmit={handleSubmit(onSubmit)}>
-        <div className="relative">
-          <div className="absolute inset-0 bg-white opacity-50 z-[-1]" />
+      <form className="z-10 p-4 max-w-2xl" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex items-center gap-4 flex-[7]">
+          <div className="border-r-2 flex-[2] font-bold border-r-mainBrown pr-4 flex h-[44px] items-center">
+            Inventory number:
+          </div>
+          <div className="w-full flex flex-[5] p-1">
+            <MainInput
+              className="!mb-0"
+              register={register("inventory_number")}
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4 flex-[7] ">
+          <div className="border-r-2 border-r-mainBrown font-bold flex-[2] pr-4 flex h-[44px] items-center">
+            Title:
+          </div>
+          <div className="max-w-lg w-full flex p-1 flex-[5]">
+            <MainInput className="!mb-0" register={register("title")} />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4 flex-[7]">
+          <div className="border-r-2 border-r-mainBrown font-bold flex-[2] pr-4 flex h-[44px] items-center">
+            Author name:
+          </div>
+          <div className="max-w-lg w-full flex p-1 flex-[5]">
+            <MainInput className="!mb-0" register={register("author")} />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4 flex-[7]">
+          <div className="border-r-2 border-r-mainBrown font-bold flex-[2] pr-4 flex h-[44px] items-center">
+            Language:
+          </div>
+          <div className="max-w-lg w-full flex p-1 flex-[5]">
+            <MainInput className="!mb-0" register={register("language")} />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4 flex-[7]">
+          <div className="border-r-2 border-r-mainBrown font-bold flex-[2] pr-4 flex h-[44px] items-center">
+            Subject:
+          </div>
+          <div className="max-w-lg w-full flex p-1 flex-[5]">
+            <MainInput className="!mb-0" register={register("subjects")} />
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4 flex-[7]">
+          <div className="border-r-2 border-r-mainBrown font-bold flex-[2] pr-4 flex h-[44px] items-center">
+            Illustartion:
+          </div>
+          <div className="max-w-lg w-full flex p-1 flex-[5]">
+            <MainInput className="!mb-0" register={register("quantity_ill")} />
+          </div>
+        </div>
+
+        {/* <div className="">
           <table className="bordered w-full mt-4 shadowed ">
             <tbody>
               <tr>
@@ -80,14 +137,15 @@ const DetailedSearch = () => {
               </tr>
             </tbody>
           </table>
-        </div>
-        <div className="mt-6 flex gap-4">
-          <Button type="submit" className="bg-gray-300">
-            Apply
-          </Button>
-          <Button onClick={handleReset} className="bg-blue-600 text-white">
-            Reset
-          </Button>
+        </div> */}
+        <div className="mt-6 flex gap-4 flex-[7]">
+          <div className="flex-[2]" />
+          <div className="flex flex-[5] gap-3 md:flex-row flex-col">
+            <Button type="submit">Search</Button>
+            <Button onClick={handleReset} className="bg-blue-600 text-white">
+              Reset
+            </Button>
+          </div>
         </div>
       </form>
     </div>

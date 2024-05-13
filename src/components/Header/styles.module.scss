@@ -1,15 +1,14 @@
-// w-full rounded-2xl border border-black bg-gray-100 h-[18vh] flex flex-1 overflow-hidden
-
 .block {
-  border-radius: 16px;
   width: 100%;
-  border: 1px solid black;
   background: transparent;
   display: flex;
   flex: 1;
   z-index: 1;
+  padding: 15px;
   overflow: hidden;
   justify-content: space-between;
+  background: url("/assets/images/headerbg.jpg");
+  background-size: contain;
   align-items: center;
   @media (max-width: 760px) {
     height: 15vh;
@@ -20,8 +19,8 @@
   width: 80px;
   height: 100%;
   object-fit: contain;
-  margin-left: 30px;
-  border-radius: 15px;
+  margin-left: 10px;
+  border-radius: 50%;
 
   @media (max-width: 760px) {
     width: 30px;
@@ -51,4 +50,9 @@
 .middle {
   font-family: "Bruno Ace SC" !important;
   margin: 10px;
+
+  & h1 {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+      1px 1px 0 #000;
+  }
 }

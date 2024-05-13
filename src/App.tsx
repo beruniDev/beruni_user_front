@@ -1,7 +1,5 @@
 import Header from "src/components/Header";
-import Container from "./components/Container";
 import Sidebar from "./components/Sidebar";
-import Card from "./components/Card";
 import Footer from "./components/Footer";
 import { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -26,20 +24,18 @@ const App = () => {
 
   return (
     <>
-      <div className="relative inset-0 main_body" />
-
-      {/* <img
-        src="/assets/images/bg.png"
-        alt="background-image"
-        className="z-0 fixed opacity-20 inset-0 bg-repeat w-full h-full object-fill"
-      /> */}
-      <Container className="relative flex flex-col h-full justify-between z-10">
-        {/* <img src="/assets/images/bg.png" alt="" /> */}
-        <Header />
-        <Card className="flex p-2 md:p-4 md:h-[81vh] h-[75vh] md:min-h-[560px] shadowed">
+      <div className="relative inset-0" />
+      <Header />
+      <div className="relative flex flex-col h-full justify-between z-10">
+        <div className="flex p-2 md:p-4 md:h-[62vh] h-[65vh] md:min-h-[560px] shadowed bg-white">
           <Sidebar />
 
-          <div className="w-full overflow-y-auto">
+          <div className="w-full overflow-y-auto relative content">
+            <img
+              src="/assets/images/app-bg.png"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-lg w-full"
+              alt=""
+            />
             <Routes>
               {!token ? (
                 <Route path="/users">
@@ -65,9 +61,9 @@ const App = () => {
               <Route element={<PrintComponent />} path={"/print/:id"} />
             </Routes>
           </div>
-        </Card>
+        </div>
         <Footer />
-      </Container>
+      </div>
     </>
   );
 };

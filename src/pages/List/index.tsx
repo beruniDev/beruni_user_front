@@ -67,7 +67,7 @@ const BookList = () => {
           </tbody>
         )}
       </table>
-      {isLoading && <Loading absolute />}
+      {isLoading && <Loading />}
       {!!books && <Pagination totalPages={books.pages} />}
       {!books?.items?.length && !isLoading && <EmptyList />}
     </div>
