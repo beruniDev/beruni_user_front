@@ -9,13 +9,13 @@ const Footer = () => {
       <div className="flex flex-[3] gap-2 md:flex-row flex-col items-center">
         <img
           src="/assets/images/footer1.png"
-          className="flex max-w-[300px] w-full"
+          className="flex max-w-[250px] w-full"
           alt="footer-img"
         />
         <img
           src="/assets/images/footer2.png"
           alt="footer-img"
-          className="flex max-w-[300px] w-full"
+          className="flex max-w-[250px] w-full"
         />
         <img
           src="/assets/images/footer3.png"
@@ -23,7 +23,7 @@ const Footer = () => {
           className="flex max-w-[250px] w-full"
         />
       </div>
-      <div className="flex flex-1 flex-col justify-center -order-1">
+      <div className="flex flex-1 flex-col justify-center md:order-[initial] -order-1">
         <h2 className="text-textColor text-2xl font-bold">Contact</h2>
         <Link
           className="text-textColor font-bold text-xl"
