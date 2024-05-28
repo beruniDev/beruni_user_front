@@ -31,9 +31,12 @@ const Header = () => {
           className={styles.leftImg}
         />
         <div className={styles.middle}>
-          <h1 className="md:text-3xl text-[10px] font-thin uppercase text-center text-[#fcd200]">
-            Heritage of Al-Beruni Institute of Oriental Studies
-          </h1>
+          <h2 className="md:text-3xl text-[10px] font-thin uppercase text-center text-[#fcd200]">
+            Heritage of Al-Beruni
+          </h2>
+          <h2 className="md:text-3xl text-[10px] font-thin uppercase text-center text-[#fcd200]">
+            Al-Beruni Institute of Oriental Studies
+          </h2>
         </div>
 
         <img
@@ -49,7 +52,7 @@ const Header = () => {
           className="bg-white w-min"
           onClick={handleSidebar}
         >
-          Menu
+          Main
         </Button>
         {!token ? (
           <Button

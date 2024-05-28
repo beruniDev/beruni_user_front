@@ -1,6 +1,6 @@
 const Home = () => {
   return (
-    <div className="overflow-y-auto content flex flex-[7] md:flex-row flex-col">
+    <div className="overflow-y-auto content flex flex-[7] md:flex-row flex-col h-full">
       <div className="flex flex-col flex-[5]">
         <p>
           The Al-Beruni Institute of Oriental Studies of Uzbekistan of Academy
@@ -29,8 +29,12 @@ const Home = () => {
       </div>
 
       <div className="flex flex-col gap-2 flex-[2]">
-        <img src="/assets/images/faya.png" alt="faya" />
-        <img src="/assets/images/books.png" alt="books" />
+        <img src="/assets/images/faya.png" alt="faya" className="flex flex-1" />
+        <img
+          src="/assets/images/books.png"
+          alt="books"
+          className="flex flex-1"
+        />
       </div>
     </div>
   );

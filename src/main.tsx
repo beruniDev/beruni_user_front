@@ -13,7 +13,7 @@ import Loading from "./components/Loader/index.tsx";
 import "react-toastify/dist/ReactToastify.css";
 
 // export const baseURL = "http://185.74.5.198:8002";
-export const baseURL = "http://192.168.20.4:8000";
+export const baseURL = "http://api-heritageof.beruni.uz";
 // export const baseURL = "http://10.0.0.137:8000";
 export default new BaseAPIClient(baseURL, store);
 

@@ -8,7 +8,7 @@ const SearchTome = () => {
   const { register } = useForm();
   return (
     <div className="flex flex-1 flex-col p-1 withBg">
-      <Title title="Search by tome" />
+      <Title title="Search by country" />
 
       <div className="mt-10 flex gap-4 md:flex-row flex-col">
         <BaseInput className="flex flex-1">
