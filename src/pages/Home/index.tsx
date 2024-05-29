@@ -1,6 +1,6 @@
 const Home = () => {
   return (
-    <div className="overflow-y-auto content flex flex-[7] md:flex-row flex-col h-full">
+    <div className="overflow-y-auto content flex flex-[7] md:flex-row flex-col h-full gap-4">
       <div className="flex flex-col flex-[5]">
         <p>
           The Al-Beruni Institute of Oriental Studies of Uzbekistan of Academy

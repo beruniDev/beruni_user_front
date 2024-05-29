@@ -4,7 +4,7 @@ import Button from "../Button";
 import { useNavigateParams } from "src/hooks/useCustomNavigate";
 import useQueryString from "src/hooks/useQueryString";
 import { isMobile } from "src/utils/helpers";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "src/store/utils/types";
 import { logoutHandler, tokenSelector } from "src/store/reducers/auth";
 
@@ -14,6 +14,7 @@ const Header = () => {
   const token = useAppSelector(tokenSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleLogout = () => {
     dispatch(logoutHandler());
@@ -21,7 +22,9 @@ const Header = () => {
   };
 
   const handleSidebar = () =>
-    !!isMobile && navigateParams({ sidebar: !sidebar ? 1 : 0 });
+    pathname === "/"
+      ? navigate("/users/main")
+      : !!isMobile && navigateParams({ sidebar: !sidebar ? 1 : 0 });
   return (
     <header>
       <div className={cl(styles.block)}>
