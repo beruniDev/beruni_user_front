@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { tokenSelector } from "src/store/reducers/auth";
+import { useAppSelector } from "src/store/utils/types";
 
 const MainPreview = () => {
+  const navigate = useNavigate();
+  const token = useAppSelector(tokenSelector);
+
+  useEffect(() => {
+    if (!!token) navigate("/admin/add");
+  }, [token]);
+
   return (
     <div className="overflow-y-auto content flex flex-[7] md:flex-row flex-col h-full">
       <div className="flex flex-col flex-[5]">

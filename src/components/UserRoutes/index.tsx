@@ -10,7 +10,11 @@ const UserRoutes = () => {
   useEffect(() => {
     if (!!token) navigate("/admin/add");
   }, [token]);
-  return <Outlet />;
+  return (
+    <div className="z-10 relative">
+      <Outlet />
+    </div>
+  );
 };
 
 export default UserRoutes;
