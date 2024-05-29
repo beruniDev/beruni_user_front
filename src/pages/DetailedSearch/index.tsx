@@ -40,7 +40,7 @@ const DetailedSearch = () => {
       <Title title={!token ? "Detailed search" : "Filter"} />
       <form className="z-10 p-4 max-w-2xl" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex items-center gap-4 flex-[7]">
-          <div className="border-r-2 flex-[2] font-bold border-r-mainBrown pr-4 flex h-[44px] items-center">
+          <div className="border-r-2 md:flex-[2] font-bold border-r-mainBrown pr-4 flex h-[44px] items-center w-[100px]">
             Inventory number:
           </div>
           <div className="w-full flex flex-[5] p-1">
@@ -52,7 +52,7 @@ const DetailedSearch = () => {
         </div>
 
         <div className="flex items-center gap-4 flex-[7] ">
-          <div className="border-r-2 border-r-mainBrown font-bold flex-[2] pr-4 flex h-[44px] items-center">
+          <div className="border-r-2 border-r-mainBrown font-bold md:flex-[2] w-[100px] pr-4 flex h-[44px] items-center">
             Title:
           </div>
           <div className="max-w-lg w-full flex p-1 flex-[5]">
@@ -61,7 +61,7 @@ const DetailedSearch = () => {
         </div>
 
         <div className="flex items-center gap-4 flex-[7]">
-          <div className="border-r-2 border-r-mainBrown font-bold flex-[2] pr-4 flex h-[44px] items-center">
+          <div className="border-r-2 border-r-mainBrown font-bold md:flex-[2] w-[100px] pr-4 flex h-[44px] items-center">
             Author name:
           </div>
           <div className="max-w-lg w-full flex p-1 flex-[5]">
@@ -70,7 +70,7 @@ const DetailedSearch = () => {
         </div>
 
         <div className="flex items-center gap-4 flex-[7]">
-          <div className="border-r-2 border-r-mainBrown font-bold flex-[2] pr-4 flex h-[44px] items-center">
+          <div className="border-r-2 border-r-mainBrown font-bold md:flex-[2] w-[100px] pr-4 flex h-[44px] items-center">
             Language:
           </div>
           <div className="max-w-lg w-full flex p-1 flex-[5]">
@@ -79,7 +79,7 @@ const DetailedSearch = () => {
         </div>
 
         <div className="flex items-center gap-4 flex-[7]">
-          <div className="border-r-2 border-r-mainBrown font-bold flex-[2] pr-4 flex h-[44px] items-center">
+          <div className="border-r-2 border-r-mainBrown font-bold md:flex-[2] w-[100px] pr-4 flex h-[44px] items-center">
             Subject:
           </div>
           <div className="max-w-lg w-full flex p-1 flex-[5]">
@@ -88,7 +88,7 @@ const DetailedSearch = () => {
         </div>
 
         <div className="flex items-center gap-4 flex-[7]">
-          <div className="border-r-2 border-r-mainBrown font-bold flex-[2] pr-4 flex h-[44px] items-center">
+          <div className="border-r-2 border-r-mainBrown font-bold md:flex-[2] w-[100px] pr-4 flex h-[44px] items-center">
             Illustartion:
           </div>
           <div className="max-w-lg w-full flex p-1 flex-[5]">
