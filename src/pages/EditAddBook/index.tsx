@@ -177,7 +177,7 @@ const EditAddBook = () => {
 
   const handleShowPhoto = (file: string) => () => {
     if (detectFileType(file) === FileType.other)
-      return window.open(`${baseURL}/${file}`);
+      return window.open(`${baseURL}/files/${file}`);
     else navigateParams({ photo: `${baseURL}/${file}` });
   };
 
