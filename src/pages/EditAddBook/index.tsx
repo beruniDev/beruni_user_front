@@ -281,10 +281,6 @@ const EditAddBook = () => {
           </Link>
         </Title>
       )}
-      {/* <div className="fixed opacity-25 flex -z-10 left-1/2 md:top-[60%] top-1/2 md:-translate-x-1/3 -translate-y-1/2 -translate-x-1/2">
-        <div className="w-[350px] h-full md:flex hidden" />
-        <img src="/assets/images/library.png" alt="" className="-z-10" />
-      </div> */}
       <table className="bordered w-full z-10">
         <tbody>
           {tableArr.map((item) => {
