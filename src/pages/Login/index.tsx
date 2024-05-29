@@ -43,18 +43,18 @@ const Login = () => {
     );
   };
   return (
-    <div className={cl("max-w-sm w-full mx-auto")}>
+    <div className={cl("max-w-sm w-full mx-auto z-10 relative")}>
       <h3 className="text-center mb-3">Log in</h3>
       {isPending && <Loading />}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <BaseInput className="mb-0" error={errors.username}>
+        <BaseInput className="mb-3" error={errors.username}>
           <MainInput
             register={register("username", { required: "required" })}
             autoFocus
             placeholder={"Username"}
           />
         </BaseInput>
-        <BaseInput className="mb-0" error={errors.password}>
+        <BaseInput className="mb-3" error={errors.password}>
           <MainInput
             register={register("password", { required: "required" })}
             type="password"

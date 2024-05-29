@@ -25,7 +25,7 @@ const BaseInput: FC<BaseProps> = ({
       )}
       {children}
       {error && (
-        <div className="alert alert-danger p-2" role="alert">
+        <div className="text-red-500 text-xs" role="alert">
           {error?.message?.toString()}
         </div>
       )}
