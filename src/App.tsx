@@ -14,15 +14,12 @@ import EditAddBook from "./pages/EditAddBook";
 import BookList from "./pages/List";
 import PrintComponent from "./components/PrintComponent";
 import MainPreview from "./pages/Main";
+import UserRoutes from "./components/UserRoutes";
+import AdminRoutes from "./components/AdminRoutes";
 
 const App = () => {
-  const navigate = useNavigate();
   const token = useAppSelector(tokenSelector);
   const { pathname } = useLocation();
-
-  // useEffect(() => {
-  //   if (window.location.pathname === "/") navigate("/users/main");
-  // }, []);
 
   return (
     <>
@@ -42,7 +39,7 @@ const App = () => {
               <Routes>
                 <Route element={<MainPreview />} path={"/"} />
                 {!token ? (
-                  <Route path="/users">
+                  <Route path="/users" element={<UserRoutes />}>
                     <Route element={<Home />} index path={"main"} />
                     <Route element={<Search />} path={"search"} />
                     <Route element={<SearchTome />} path={"tome-search"} />
@@ -54,7 +51,7 @@ const App = () => {
                   </Route>
                 ) : (
                   // admin routes
-                  <Route path={"/admin"}>
+                  <Route path={"/admin"} element={<AdminRoutes />}>
                     <Route element={<EditAddBook />} path={"add"} />
                     <Route element={<Search />} path={"search"} />
                     <Route element={<DetailedSearch />} path={"filter"} />
