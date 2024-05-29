@@ -32,37 +32,39 @@ const App = () => {
         <div className="flex p-2 md:p-4 md:h-[62vh] h-[65vh] md:min-h-[560px] shadowed bg-white">
           {pathname !== "/" && <Sidebar />}
 
-          <div className="w-full overflow-y-auto relative content">
+          <div className="w-full overflow-y-auto relative content z-10">
             <img
               src="/assets/images/app-bg.png"
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-lg w-full"
-              alt=""
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-lg w-full z-[1]"
+              alt="main-bg"
             />
-            <Routes>
-              <Route element={<MainPreview />} path={"/"} />
-              {!token ? (
-                <Route path="/users">
-                  <Route element={<Home />} index path={"main"} />
-                  <Route element={<Search />} path={"search"} />
-                  <Route element={<SearchTome />} path={"tome-search"} />
-                  <Route
-                    element={<DetailedSearch />}
-                    path={"detailed-search"}
-                  />
-                  <Route element={<Login />} path={"login"} />
-                </Route>
-              ) : (
-                // admin routes
-                <Route path={"/admin"}>
-                  <Route element={<EditAddBook />} path={"add"} />
-                  <Route element={<Search />} path={"search"} />
-                  <Route element={<DetailedSearch />} path={"filter"} />
-                </Route>
-              )}
-              <Route element={<EditAddBook />} path={"/list/:id"} />
-              <Route element={<BookList />} path={"/list"} />
-              <Route element={<PrintComponent />} path={"/print/:id"} />
-            </Routes>
+            <div className="z-10 relative">
+              <Routes>
+                <Route element={<MainPreview />} path={"/"} />
+                {!token ? (
+                  <Route path="/users">
+                    <Route element={<Home />} index path={"main"} />
+                    <Route element={<Search />} path={"search"} />
+                    <Route element={<SearchTome />} path={"tome-search"} />
+                    <Route
+                      element={<DetailedSearch />}
+                      path={"detailed-search"}
+                    />
+                    <Route element={<Login />} path={"login"} />
+                  </Route>
+                ) : (
+                  // admin routes
+                  <Route path={"/admin"}>
+                    <Route element={<EditAddBook />} path={"add"} />
+                    <Route element={<Search />} path={"search"} />
+                    <Route element={<DetailedSearch />} path={"filter"} />
+                  </Route>
+                )}
+                <Route element={<EditAddBook />} path={"/list/:id"} />
+                <Route element={<BookList />} path={"/list"} />
+                <Route element={<PrintComponent />} path={"/print/:id"} />
+              </Routes>
+            </div>
           </div>
         </div>
         <Footer />

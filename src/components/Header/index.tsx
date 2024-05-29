@@ -18,7 +18,7 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logoutHandler());
-    navigate("/users/main");
+    navigate("");
   };
 
   const handleSidebar = () =>
@@ -71,7 +71,7 @@ const Header = () => {
             textClassName="font-bold"
             className="bg-white w-min"
           >
-            Login
+            Logout
           </Button>
         )}
       </div>
