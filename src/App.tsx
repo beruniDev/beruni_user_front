@@ -32,7 +32,7 @@ const App = () => {
           <div className="w-full overflow-y-auto relative content">
             <img
               src="/assets/images/app-bg.png"
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-lg w-full z-[1]"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-lg w-full z-[0]"
               alt="main-bg"
             />
 

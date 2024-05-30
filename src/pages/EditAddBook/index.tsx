@@ -1,6 +1,7 @@
 import { ChangeEvent, Fragment, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { baseURL } from "src/api/baseApi";
 import Button from "src/components/Button";
 import Loading from "src/components/Loader";
 import Modal from "src/components/Modal";
@@ -14,7 +15,6 @@ import {
   useRemoveParams,
 } from "src/hooks/useCustomNavigate";
 import useQueryString from "src/hooks/useQueryString";
-import { baseURL } from "src/main";
 import { tokenSelector } from "src/store/reducers/auth";
 import { useAppSelector } from "src/store/utils/types";
 import {
@@ -26,36 +26,30 @@ import {
 import { errorToast, successToast } from "src/utils/toast";
 
 const tableArr = [
-  { name: "Inv. №", id: 1 },
+  // { name: "Inv. №", id: 1 },
+  {
+    name: "Country",
+    id: 1,
+    child: [
+      { name: "Country", id: 1 },
+      { name: "Establishment/Institution", id: 2 },
+      { name: "Collection, code", id: 3 },
+    ],
+  },
+  {
+    name: "Author",
+    id: 2,
+  },
   {
     name: "Title",
-    id: 2,
+    id: 3,
     child: [
       { name: "Title", id: 1 },
       { name: "Title as in manuscript", id: 2 },
       { name: "Known also as", id: 3 },
     ],
   },
-  {
-    name: "Author",
-    id: 3,
-    child: [
-      { name: "Author (name)", id: 1 },
-      { name: "Author (name) as in manuscript", id: 2 },
-      { name: "Commentator", id: 3 },
-      { name: "Commentator as in manuscript", id: 4 },
-      { name: "Translator", id: 5 },
-      {
-        name: "Translator (name) as In manuscript",
-        id: 6,
-      },
-      { name: "Compiler", id: 7 },
-      {
-        name: "Compiler (name) as in manuscript",
-        id: 8,
-      },
-    ],
-  },
+
   { name: "Date of writing", id: 4 },
   { name: "Language", id: 5 },
   { name: "Subject", id: 6 },
@@ -67,45 +61,45 @@ const tableArr = [
       { name: "Available illustration", id: 2 },
     ],
   },
-  {
-    name: "Lines",
-    id: 8,
-    child: [
-      { name: "Quantity of lines", id: 1 },
-      { name: "Quantity of columns", id: 2 },
-    ],
-  },
-  { name: "Size", id: 9 },
-  { name: "Paper", id: 10 },
-  { name: "Copyist", id: 11 },
+  // {
+  //   name: "Lines",
+  //   id: 8,
+  //   child: [
+  //     { name: "Quantity of lines", id: 1 },
+  //     { name: "Quantity of columns", id: 2 },
+  //   ],
+  // },
+  // { name: "Size", id: 9 },
+  // { name: "Paper", id: 10 },
+  { name: "Copyist", id: 8 },
   {
     name: "Date, Place of Copying",
-    id: 12,
+    id: 9,
     child: [
       { name: "Date of Copying", id: 1 },
       { name: "Place of Copying", id: 2 },
     ],
   },
-  { name: "Handwriting kind", id: 13 },
-  { name: "Cover", id: 14 },
-  { name: "Cover color", id: 15 },
-  { name: "Stamp of bookbinder", id: 16 },
-  {
-    name: "Text (partly)",
-    id: 17,
-    child: [
-      { name: "Beginning", id: 1 },
-      { name: "The existing beginning", id: 2 },
-      { name: "Beginning after amma ba'd", id: 3 },
-      { name: "End", id: 4 },
-      { name: "The existing end", id: 5 },
-      { name: "Colophon", id: 6 },
-    ],
-  },
-  { name: "Defects", id: 18 },
-  { name: "Fixation in CBP", id: 19 },
-  { name: "Note", id: 20 },
-  { name: "Author of description", id: 21 },
+  { name: "Handwriting kind", id: 10 },
+  // { name: "Cover", id: 14 },
+  // { name: "Cover color", id: 15 },
+  // { name: "Stamp of bookbinder", id: 16 },
+  // {
+  //   name: "Text (partly)",
+  //   id: 17,
+  //   child: [
+  //     { name: "Beginning", id: 1 },
+  //     { name: "The existing beginning", id: 2 },
+  //     { name: "Beginning after amma ba'd", id: 3 },
+  //     { name: "End", id: 4 },
+  //     { name: "The existing end", id: 5 },
+  //     { name: "Colophon", id: 6 },
+  //   ],
+  // },
+  { name: "Defects", id: 11 },
+  // { name: "Fixation in CBP", id: 19 },
+  { name: "Note", id: 12 },
+  // { name: "Author of description", id: 21 },
 ];
 
 const EditAddBook = () => {

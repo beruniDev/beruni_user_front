@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import apiClient from "src/main";
+import baseApi from "src/api/baseApi";
 
 export const useUser = ({
   enabled = true,
@@ -11,8 +11,8 @@ export const useUser = ({
   return useQuery({
     queryKey: ["get_create_user"],
     queryFn: () =>
-      apiClient
-        .get({ url: "/user/get/create", params: { phone_number } })
+      baseApi
+        .get("/user/get/create", { params: { phone_number } })
         .then(({ data: response }) => response as any),
     enabled,
   });

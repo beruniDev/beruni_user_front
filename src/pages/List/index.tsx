@@ -16,7 +16,7 @@ const column = [
   { name: "name", key: "purchaser" },
   { name: "Author", key: "id" },
   { name: "Language", key: "rate" },
-  { name: "Author of description", key: "status" },
+  // { name: "Author of description", key: "status" },
   { name: "Date of writing", key: "date" },
   { name: "", key: "" },
 ];
@@ -52,7 +52,7 @@ const BookList = () => {
                 <td>{book.title}</td>
                 <td>{book?.author}</td>
                 <td>{book.language}</td>
-                <td>{book?.descript_auth}</td>
+                {/* <td>{book?.descript_auth}</td> */}
                 <td>{book.date_written}</td>
                 <td className="!w-8">
                   <Link

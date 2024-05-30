@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import apiClient from "src/main";
+import baseApi from "src/api/baseApi";
 
 const filesMutation = () => {
   const contentType = "multipart/form-data";
@@ -8,11 +8,8 @@ const filesMutation = () => {
   return useMutation({
     mutationKey: ["image_upload"],
     mutationFn: async (body: any) => {
-      const { data } = await apiClient.post({
-        url: "/files",
-        body,
-        contentType,
-        config,
+      const { data } = await baseApi.post("/files", body, {
+        headers: { "Content-Type": contentType },
       });
       return data as { files: string[] };
     },

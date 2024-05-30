@@ -36,12 +36,12 @@ const DetailedSearch = () => {
   }, []);
 
   return (
-    <div className="flex flex-1 flex-col p-1 withBg">
+    <div className="flex flex-1 flex-col p-1 withBg z-10">
       <Title title={!token ? "Detailed search" : "Filter"} />
       <form className="z-10 p-4 max-w-2xl" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex items-center gap-4 flex-[7]">
           <div className="border-r-2 md:flex-[2] font-bold border-r-mainBrown pr-4 flex h-[44px] items-center w-[100px]">
-            Inventory number:
+            Country:
           </div>
           <div className="w-full flex flex-[5] p-1">
             <MainInput
@@ -142,7 +142,10 @@ const DetailedSearch = () => {
           <div className="flex-[2]" />
           <div className="flex flex-[5] gap-3 md:flex-row flex-col">
             <Button type="submit">Search</Button>
-            <Button onClick={handleReset} className="bg-blue-600 text-white">
+            <Button
+              onClick={handleReset}
+              className="bg-blue-600 text-white z-20 relative"
+            >
               Reset
             </Button>
           </div>

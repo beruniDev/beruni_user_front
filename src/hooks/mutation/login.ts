@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import apiClient from "src/main";
+import baseApi from "src/api/baseApi";
 
 interface LoginTypes {
   access_token: string;
@@ -14,8 +14,8 @@ const loginMutation = () => {
   return useMutation({
     mutationKey: ["login"],
     mutationFn: (body: { username: string; password: string }) =>
-      apiClient
-        .post({ url: "/login", body, contentType })
+      baseApi
+        .post("/login", body, { headers: { "Content-Type": contentType } })
         .then(({ data }) => data as unknown as LoginTypes),
   });
 };

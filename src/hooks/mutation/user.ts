@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import apiClient from "src/main";
+import baseApi from "src/api/baseApi";
 import { errorToast } from "src/utils/toast";
 
 interface Body {
@@ -18,20 +18,15 @@ const userMutation = () => {
     mutationKey: ["create_update_user"],
     mutationFn: (body: Body) => {
       if (body.id)
-        return apiClient
-          .put({ url: "/users", body })
+        return baseApi
+          .put("/users", body)
           .then((res) => {
             if (res.status === 200) return res;
           })
           .catch((e) => errorToast(e.message));
-      return apiClient
-        .post({
-          url: "/user",
-          body,
-        })
-        .then((res) => {
-          if (res.status === 200) return res;
-        });
+      return baseApi.post("/user", body).then((res) => {
+        if (res.status === 200) return res;
+      });
     },
 
     onError: (e: any) =>

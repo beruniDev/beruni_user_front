@@ -1,8 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import apiClient from "src/main";
+import baseApi from "src/api/baseApi";
 
 interface bookBody {
-  inventory_number: string;
   title: string;
   title_mono: string;
   title_known: string;
@@ -40,6 +39,7 @@ interface bookBody {
   fixation: string;
   note: string;
   descript_auth: string;
+  inventory_number: string;
 
   file: any;
   images: string[];
@@ -50,26 +50,19 @@ interface bookBody {
 const bookMutation = () => {
   const contentType = "multipart/form-data";
 
-  const config = { timeout: 1000000 };
   return useMutation({
     mutationKey: ["post_book"],
     mutationFn: async ({ body, params }: { body: bookBody; params: any }) => {
       if (body.id) {
-        const { data } = await apiClient.put({
-          url: "/books",
-          body,
+        const { data } = await baseApi.put("/books", body, {
           params,
-          contentType,
-          config,
+          headers: { "Content-Type": contentType },
         });
         return data;
       } else {
-        const { data } = await apiClient.post({
-          url: "/books",
-          body,
+        const { data } = await baseApi.post("/books", body, {
           params,
-          contentType,
-          config,
+          headers: { "Content-Type": contentType },
         });
         return data;
       }

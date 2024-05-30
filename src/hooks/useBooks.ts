@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import apiClient from "src/main";
+import baseApi from "src/api/baseApi";
 import { BookTypes } from "src/utils/types";
 
 interface Params {
@@ -19,8 +19,8 @@ export const useBooks = (params: Params) => {
   return useQuery({
     queryKey: ["books", params],
     queryFn: () =>
-      apiClient
-        .get({ url: "/books", params })
+      baseApi
+        .get("/books", { params })
         .then(({ data: response }) => response as BookTypes),
     enabled: params.enabled,
   });

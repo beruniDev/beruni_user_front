@@ -13,17 +13,6 @@ import Title from "src/components/Title";
 import useBookSearch from "src/hooks/useBookSearch";
 import { tokenSelector } from "src/store/reducers/auth";
 import { useAppSelector } from "src/store/utils/types";
-import { handleIdx } from "src/utils/helpers";
-
-const column = [
-  { name: "№", key: "id" },
-  { name: "name", key: "purchaser" },
-  { name: "Author", key: "id" },
-  { name: "Language", key: "rate" },
-  { name: "Author of description", key: "status" },
-  { name: "Date of writing", key: "date" },
-  { name: "", key: "" },
-];
 
 const Search = () => {
   const [text, $text] = useState<string>();
