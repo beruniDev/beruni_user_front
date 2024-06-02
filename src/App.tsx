@@ -7,7 +7,7 @@ import DetailedSearch from "src/pages/DetailedSearch";
 import Home from "src/pages/Home";
 import Login from "src/pages/Login";
 import Search from "src/pages/Search";
-import SearchTome from "src/pages/SearchTome";
+import SearchByCountry from "src/pages/SearchByCountry";
 import { useAppSelector } from "./store/utils/types";
 import { tokenSelector } from "./store/reducers/auth";
 import EditAddBook from "./pages/EditAddBook";
@@ -42,7 +42,7 @@ const App = () => {
                 <Route path="/users" element={<UserRoutes />}>
                   <Route element={<Home />} index path={"main"} />
                   <Route element={<Search />} path={"search"} />
-                  <Route element={<SearchTome />} path={"tome-search"} />
+                  <Route element={<SearchByCountry />} path={"tome-search"} />
                   <Route
                     element={<DetailedSearch />}
                     path={"detailed-search"}

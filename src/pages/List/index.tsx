@@ -52,7 +52,6 @@ const BookList = () => {
                 <td>{book.title}</td>
                 <td>{book?.author}</td>
                 <td>{book.language}</td>
-                {/* <td>{book?.descript_auth}</td> */}
                 <td>{book.date_written}</td>
                 <td className="!w-8">
                   <Link

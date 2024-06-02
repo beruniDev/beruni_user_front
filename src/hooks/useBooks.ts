@@ -15,14 +15,14 @@ interface Params {
   size?: string | number;
 }
 
-export const useBooks = (params: Params) => {
+export const useBooks = ({ enabled, ...params }: Params) => {
   return useQuery({
     queryKey: ["books", params],
     queryFn: () =>
       baseApi
         .get("/books", { params })
         .then(({ data: response }) => response as BookTypes),
-    enabled: params.enabled,
+    enabled,
   });
 };
 
