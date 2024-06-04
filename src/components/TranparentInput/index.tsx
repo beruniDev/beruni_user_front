@@ -1,4 +1,4 @@
-import { FC, HTMLInputTypeAttribute } from "react";
+import { FC, HTMLInputTypeAttribute, useRef } from "react";
 import cl from "classnames";
 import { UseFormRegisterReturn } from "react-hook-form";
 
@@ -22,8 +22,12 @@ const TranparentInput: FC<Props> = ({
   ...others
 }) => {
   return (
-    <input
-      className={cl("absolute inset-0 py-1 px-2 bg-transparent", className)}
+    <textarea
+      rows={2}
+      className={cl(
+        "absolute inset-0 py-1 px-2 bg-transparent resize-none outline-none h-full w-full",
+        className
+      )}
       placeholder={placeholder || ""}
       ref={ref}
       {...register}

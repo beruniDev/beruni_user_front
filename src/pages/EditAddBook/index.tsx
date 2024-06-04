@@ -277,57 +277,53 @@ const EditAddBook = () => {
       )}
       <table className="bordered w-full z-10">
         <tbody>
-          {tableArr.map((item) => {
-            if (!item.child?.length)
-              return (
-                <tr key={item.id}>
-                  <th colSpan={2}>{inputnames[`${item.id}`]}</th>
-                  <td colSpan={3} className="p-0 relative">
+          {tableArr.map((item) =>
+            !item.child?.length ? (
+              <tr key={item.id} className="min-h-max h-full">
+                <th colSpan={2}>{inputnames[`${item.id}`]}</th>
+                <td colSpan={3} className="p-0 relative h-14">
+                  <TranparentInput
+                    register={register(`${item.id}`, {
+                      disabled: !token,
+                    })}
+                  />
+                </td>
+              </tr>
+            ) : (
+              <Fragment key={item.id + "child"}>
+                <tr>
+                  <th rowSpan={item.child.length} className="w-[150px]">
+                    {inputnames[`${item.id}`]}
+                  </th>
+
+                  <th className="w-[200px]">
+                    {inputnames[`${item.id}_${item.child[0].id}`]}
+                  </th>
+
+                  <td colSpan={3} className="p-0 relative h-14">
                     <TranparentInput
-                      register={register(`${item.id}`, {
+                      register={register(`${item.id}_${item.child[0].id}`, {
                         disabled: !token,
                       })}
                     />
                   </td>
                 </tr>
-              );
-            else
-              return (
-                <Fragment key={item.id + "child"}>
-                  <tr>
-                    <th rowSpan={item.child.length} className="w-[150px]">
-                      {inputnames[`${item.id}`]}
-                    </th>
 
-                    <th className="w-[200px]">
-                      {inputnames[`${item.id}_${item.child[0].id}`]}
-                    </th>
-
-                    <td colSpan={3} className="p-0 relative">
+                {item.child.slice(1).map((child) => (
+                  <tr key={`${item.id}_${child.id}`}>
+                    <th>{inputnames[`${item.id}_${child.id}`]}</th>
+                    <td className="p-0 relative h-14">
                       <TranparentInput
-                        // type={item.child?.[0]?.inputType}
-                        register={register(`${item.id}_${item.child[0].id}`, {
+                        register={register(`${item.id}_${child.id}`, {
                           disabled: !token,
                         })}
                       />
                     </td>
                   </tr>
-
-                  {item.child.slice(1).map((child) => (
-                    <tr key={`${item.id}_${child.id}`}>
-                      <th>{inputnames[`${item.id}_${child.id}`]}</th>
-                      <td className="p-0 relative">
-                        <TranparentInput
-                          register={register(`${item.id}_${child.id}`, {
-                            disabled: !token,
-                          })}
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </Fragment>
-              );
-          })}
+                ))}
+              </Fragment>
+            )
+          )}
 
           {!!token && (
             <>
