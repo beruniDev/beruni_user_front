@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className="md:flex flex-1 hidden" />
 
-      <div className="flex flex-[3] gap-2 md:flex-row flex-col items-center">
+      <div className="flex flex-[3] gap-2 md:flex-row flex-col items-center justify-center">
         <img
           src="/assets/images/footer1.png"
           className="flex max-w-[250px] w-full"
