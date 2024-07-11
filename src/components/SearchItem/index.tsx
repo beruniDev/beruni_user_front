@@ -18,9 +18,9 @@ const SearchItem = ({ data: books }: Props) => {
             <tbody>
               <tr>
                 <td width={"50%"} className="bg-transparent">
-                  <span className="bg-darkGray text-white font-bold px-3 py-1 ">
+                  <div className="bg-darkGray text-white font-bold px-3 py-1 w-24 text-ellipsis overflow-hidden whitespace-nowrap">
                     {book.inventory_number}
-                  </span>
+                  </div>
                 </td>
                 <td width={"50%"}>{book.title}</td>
               </tr>

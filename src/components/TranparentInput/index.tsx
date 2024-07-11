@@ -22,8 +22,7 @@ const TranparentInput: FC<Props> = ({
   ...others
 }) => {
   return (
-    <textarea
-      rows={2}
+    <input
       className={cl(
         "absolute inset-0 py-1 px-2 bg-transparent resize-none outline-none h-full w-full",
         className

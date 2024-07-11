@@ -56,7 +56,11 @@ const DetailedSearch = () => {
             Title:
           </div>
           <div className="max-w-lg w-full flex p-1 flex-[5]">
-            <MainInput className="!mb-0" register={register("title")} />
+            <MainInput
+              className="!mb-0"
+              autoComplete="name_title"
+              register={register("name_title")}
+            />
           </div>
         </div>
 

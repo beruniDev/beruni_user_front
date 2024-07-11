@@ -26,6 +26,8 @@ interface Props {
   ref?: any;
   inputStyle?: InputStyle;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
+  name?: string;
+  autoComplete?: string;
 }
 
 const MainInput: FC<Props> = ({

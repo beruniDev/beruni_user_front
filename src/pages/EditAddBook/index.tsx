@@ -280,9 +280,12 @@ const EditAddBook = () => {
           {tableArr.map((item) =>
             !item.child?.length ? (
               <tr key={item.id} className="min-h-max h-full">
-                <th colSpan={2}>{inputnames[`${item.id}`]}</th>
+                <th colSpan={2} className="text-xl">
+                  {inputnames[`${item.id}`]}
+                </th>
                 <td colSpan={3} className="p-0 relative h-14">
                   <TranparentInput
+                    className="text-xl"
                     register={register(`${item.id}`, {
                       disabled: !token,
                     })}
@@ -292,15 +295,15 @@ const EditAddBook = () => {
             ) : (
               <Fragment key={item.id + "child"}>
                 <tr>
-                  <th rowSpan={item.child.length} className="w-[150px]">
+                  <th rowSpan={item.child.length} className="w-[150px] text-xl">
                     {inputnames[`${item.id}`]}
                   </th>
 
-                  <th className="w-[200px]">
+                  <th className="w-[200px] text-xl">
                     {inputnames[`${item.id}_${item.child[0].id}`]}
                   </th>
 
-                  <td colSpan={3} className="p-0 relative h-14">
+                  <td colSpan={3} className="p-0 relative h-14 text-xl">
                     <TranparentInput
                       register={register(`${item.id}_${item.child[0].id}`, {
                         disabled: !token,
@@ -309,11 +312,14 @@ const EditAddBook = () => {
                   </td>
                 </tr>
 
-                {item.child.slice(1).map((child) => (
+                {item?.child?.slice(1).map((child) => (
                   <tr key={`${item.id}_${child.id}`}>
-                    <th>{inputnames[`${item.id}_${child.id}`]}</th>
+                    <th className="text-xl">
+                      {inputnames[`${item.id}_${child.id}`]}
+                    </th>
                     <td className="p-0 relative h-14">
                       <TranparentInput
+                        className="text-xl"
                         register={register(`${item.id}_${child.id}`, {
                           disabled: !token,
                         })}
@@ -328,20 +334,22 @@ const EditAddBook = () => {
           {!!token && (
             <>
               <tr>
-                <th colSpan={2}>File upload</th>
+                <th colSpan={2} className="text-xl">
+                  File upload
+                </th>
                 <td colSpan={2}>
                   <div className="flex flex-wrap flex-1 flex-col md:flex-row gap-2 overflow-hidden">
                     {!!book?.file && !!id && (
                       <div
                         onClick={handleShowPhoto(book.file)}
-                        className="text-blue-500 flex-1 cursor-pointer"
+                        className="text-blue-500 flex-1 cursor-pointer text-xl"
                       >
                         file
                       </div>
                     )}
                     {!!watch("file")?.length &&
                       typeof watch("file") === "object" && (
-                        <div className="text-blue-500 flex-1">
+                        <div className="text-blue-500 flex-1 text-xl">
                           uploaded file
                         </div>
                       )}
@@ -355,7 +363,9 @@ const EditAddBook = () => {
                 </td>
               </tr>
               <tr>
-                <th colSpan={2}>Image upload</th>
+                <th colSpan={2} className="text-xl">
+                  Image upload
+                </th>
                 <td colSpan={2} className="overflow-hidden">
                   <input
                     type="file"

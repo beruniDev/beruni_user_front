@@ -14,7 +14,7 @@ const routes = [
     url: "/users/main",
   },
   {
-    name: "Search",
+    name: "Search by date of copying",
     url: "/users/search",
   },
   {
@@ -37,7 +37,7 @@ const adminRoutes = [
     url: "/admin/add",
   },
   {
-    name: "Search",
+    name: "Search by date of copying",
     url: "/admin/search",
   },
   {

@@ -19,7 +19,7 @@ export const bookValues = {
   size: "1_2", // establishment
   paper: "1_3", // collection
   author: "2",
-  title: "3_1",
+  name_title: "3_1",
   title_mono: "3_2",
   title_known: "3_3",
   // author_mono: "3_2",
