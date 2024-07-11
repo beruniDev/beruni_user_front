@@ -2,7 +2,7 @@ const Home = () => {
   return (
     <div className="overflow-y-auto content flex flex-[7] md:flex-row flex-col h-full gap-4">
       <div className="flex flex-col flex-[5]">
-        <p>
+        <p className="indent-6">
           The Al-Beruni Institute of Oriental Studies of Uzbekistan of Academy
           of Sciences has a collection of oriental manuscripts which can well
           match with any treasury of its kind of the world both in its
@@ -14,7 +14,7 @@ const Home = () => {
           over to the newly organized Institute.
         </p>
 
-        <p className="mt-2">
+        <p className="mt-2 indent-6">
           At first, the Institute had only one section - on the Study of
           oriental Manuscripts. However, with the expansion of the Institute's
           researches also grew the number of these sections, including sessions

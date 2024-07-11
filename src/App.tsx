@@ -16,6 +16,7 @@ import PrintComponent from "./components/PrintComponent";
 import MainPreview from "./pages/Main";
 import UserRoutes from "./components/UserRoutes";
 import AdminRoutes from "./components/AdminRoutes";
+import Biography from "./pages/Biography";
 
 const App = () => {
   const token = useAppSelector(tokenSelector);
@@ -41,6 +42,7 @@ const App = () => {
               {!token ? (
                 <Route path="/users" element={<UserRoutes />}>
                   <Route element={<Home />} index path={"main"} />
+                  <Route element={<Biography />} index path={"biography"} />
                   <Route element={<Search />} path={"search"} />
                   <Route element={<SearchByCountry />} path={"tome-search"} />
                   <Route

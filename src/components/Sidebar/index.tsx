@@ -14,6 +14,10 @@ const routes = [
     url: "/users/main",
   },
   {
+    name: "Biography",
+    url: "/users/biography",
+  },
+  {
     name: "Search by date of copying",
     url: "/users/search",
   },
