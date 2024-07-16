@@ -37,6 +37,7 @@ const SearchByCountry = () => {
           <MainInput
             placeholder={"Search by country..."}
             onChange={handleChange}
+            name="search_by_country"
             onKeyDown={handleKeyDown}
           />
         </BaseInput>
