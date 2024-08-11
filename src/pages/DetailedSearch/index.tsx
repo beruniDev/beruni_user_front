@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import MainInput from "src/components/BaseInputs/MainInput";
 import Button from "src/components/Button";
 import Title from "src/components/Title";
-import TranparentInput from "src/components/TranparentInput";
 import { tokenSelector } from "src/store/reducers/auth";
 import { filterHandler, filterSelector } from "src/store/reducers/filter";
 import { useAppDispatch, useAppSelector } from "src/store/utils/types";
@@ -59,7 +58,7 @@ const DetailedSearch = () => {
             <MainInput
               className="!mb-0"
               autoComplete="name_title"
-              register={register("name_title")}
+              register={register("title")}
             />
           </div>
         </div>
@@ -99,49 +98,6 @@ const DetailedSearch = () => {
             <MainInput className="!mb-0" register={register("quantity_ill")} />
           </div>
         </div>
-
-        {/* <div className="">
-          <table className="bordered w-full mt-4 shadowed ">
-            <tbody>
-              <tr>
-                <th className="md:w-[300px] w-40">Inventory number:</th>
-                <td className="p-0 relative">
-                  <TranparentInput register={register("inventory_number")} />
-                </td>
-              </tr>
-              <tr>
-                <th>Title:</th>
-                <td className="p-0 relative">
-                  <TranparentInput register={register("title")} />
-                </td>
-              </tr>
-              <tr>
-                <th>Author name:</th>
-                <td className="p-0 relative">
-                  <TranparentInput register={register("author")} />
-                </td>
-              </tr>
-              <tr>
-                <th>Language:</th>
-                <td className="p-0 relative">
-                  <TranparentInput register={register("language")} />
-                </td>
-              </tr>
-              <tr>
-                <th>Subject:</th>
-                <td className="p-0 relative">
-                  <TranparentInput register={register("subjects")} />
-                </td>
-              </tr>
-              <tr>
-                <th>Illustartion:</th>
-                <td className="p-0 relative">
-                  <TranparentInput register={register("quantity_ill")} />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div> */}
         <div className="mt-6 flex gap-4 flex-[7]">
           <div className="flex-[2]" />
           <div className="flex flex-[5] gap-3 md:flex-row flex-col">

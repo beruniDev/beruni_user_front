@@ -22,8 +22,12 @@ const PrintComponent = () => {
       <table className="w-[700px] bordered h-full  bg-white">
         <tbody>
           <tr>
-            <th>Inventory number</th>
+            <th>Country</th>
             <td className="text-right">{book?.inventory_number}</td>
+          </tr>
+          <tr>
+            <th>Author name</th>
+            <td className="text-right">{book?.author}</td>
           </tr>
           <tr>
             <th>Title</th>
@@ -32,10 +36,6 @@ const PrintComponent = () => {
           <tr>
             <th>Known also as</th>
             <td className="text-right">{book?.title_known}</td>
-          </tr>
-          <tr>
-            <th>Author name</th>
-            <td className="text-right">{book?.author}</td>
           </tr>
           <tr>
             <th>Date of writing</th>
@@ -57,22 +57,22 @@ const PrintComponent = () => {
             <th>Illustrations</th>
             <td className="text-right">{book?.quantity_ill}</td>
           </tr>
-          <tr>
+          {/* <tr>
             <th>Quantity of lines</th>
             <td className="text-right">{book?.lines}</td>
-          </tr>
-          <tr>
+          </tr> */}
+          {/* <tr>
             <th>Quantity of columns</th>
             <td className="text-right">{book?.lines}</td>
-          </tr>
-          <tr>
+          </tr> */}
+          {/* <tr>
             <th>Size</th>
             <td className="text-right">{book?.size}</td>
           </tr>
           <tr>
             <th>Paper</th>
             <td className="text-right">{book?.paper}</td>
-          </tr>
+          </tr> */}
           <tr>
             <th>Date of copying</th>
             <td className="text-right">{book?.copy_date}</td>
@@ -85,7 +85,7 @@ const PrintComponent = () => {
             <th>Handwriting kinds</th>
             <td className="text-right">{book?.type_handwriting}</td>
           </tr>
-          <tr>
+          {/* <tr>
             <th>Cover types</th>
             <td className="text-right">{book?.cover}</td>
           </tr>
@@ -96,8 +96,8 @@ const PrintComponent = () => {
           <tr>
             <th>Stamp of bookbinder</th>
             <td className="text-right">{book?.stamp}</td>
-          </tr>
-          <tr>
+          </tr> */}
+          {/* <tr>
             <th>Beginning</th>
             <td className="text-right">{book?.text_begin}</td>
           </tr>
@@ -112,7 +112,7 @@ const PrintComponent = () => {
           <tr>
             <th>Colophon</th>
             <td className="text-right">{book?.colophon}</td>
-          </tr>
+          </tr> */}
           <tr>
             <th>Defects</th>
             <td className="text-right">{book?.defects} </td>

@@ -13,7 +13,7 @@ import { handleIdx } from "src/utils/helpers";
 
 const column = [
   { name: "№", key: "id" },
-  { name: "name", key: "purchaser" },
+  { name: "Title", key: "purchaser" },
   { name: "Author", key: "id" },
   { name: "Language", key: "rate" },
   // { name: "Author of description", key: "status" },
