@@ -1,8 +1,9 @@
-import { ChangeEvent, Fragment, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { baseURL } from "src/api/baseApi";
 import Button from "src/components/Button";
+import Linkify from "src/components/Linkify";
 import Loading from "src/components/Loader";
 import Modal from "src/components/Modal";
 import Title from "src/components/Title";
@@ -17,90 +18,8 @@ import {
 import useQueryString from "src/hooks/useQueryString";
 import { tokenSelector } from "src/store/reducers/auth";
 import { useAppSelector } from "src/store/utils/types";
-import {
-  FileType,
-  bookValues,
-  detectFileType,
-  inputnames,
-} from "src/utils/helpers";
+import { FileType, bookValues, detectFileType } from "src/utils/helpers";
 import { errorToast, successToast } from "src/utils/toast";
-
-const tableArr = [
-  // { name: "Inv. №", id: 1 },
-  {
-    name: "Country",
-    id: 1,
-    child: [
-      { name: "Country", id: 1 },
-      { name: "Establishment/Institution", id: 2 },
-      { name: "Collection, code", id: 3 },
-    ],
-  },
-  {
-    name: "Author",
-    id: 2,
-  },
-  {
-    name: "Title",
-    id: 3,
-    child: [
-      { name: "Title", id: 1 },
-      { name: "Title as in manuscript", id: 2 },
-      { name: "Known also as", id: 3 },
-    ],
-  },
-
-  { name: "Date of writing", id: 4 },
-  { name: "Language", id: 5 },
-  { name: "Subject", id: 6 },
-  {
-    name: "Quantity of sheets",
-    id: 7,
-    child: [
-      { name: "Quantity of sheets", id: 1 },
-      { name: "Available illustration", id: 2 },
-    ],
-  },
-  // {
-  //   name: "Lines",
-  //   id: 8,
-  //   child: [
-  //     { name: "Quantity of lines", id: 1 },
-  //     { name: "Quantity of columns", id: 2 },
-  //   ],
-  // },
-  // { name: "Size", id: 9 },
-  // { name: "Paper", id: 10 },
-  { name: "Copyist", id: 8 },
-  {
-    name: "Date, Place of Copying",
-    id: 9,
-    child: [
-      { name: "Date of Copying", id: 1 },
-      { name: "Place of Copying", id: 2 },
-    ],
-  },
-  { name: "Handwriting kind", id: 10 },
-  // { name: "Cover", id: 14 },
-  // { name: "Cover color", id: 15 },
-  // { name: "Stamp of bookbinder", id: 16 },
-  // {
-  //   name: "Text (partly)",
-  //   id: 17,
-  //   child: [
-  //     { name: "Beginning", id: 1 },
-  //     { name: "The existing beginning", id: 2 },
-  //     { name: "Beginning after amma ba'd", id: 3 },
-  //     { name: "End", id: 4 },
-  //     { name: "The existing end", id: 5 },
-  //     { name: "Colophon", id: 6 },
-  //   ],
-  // },
-  { name: "Defects", id: 11 },
-  // { name: "Fixation in CBP", id: 19 },
-  { name: "Note", id: 12 },
-  // { name: "Author of description", id: 21 },
-];
 
 const EditAddBook = () => {
   const { id } = useParams();
@@ -112,6 +31,9 @@ const EditAddBook = () => {
   const { register, reset, getValues, handleSubmit, watch, setValue } =
     useForm();
   const [images, $images] = useState<string[]>([]);
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [note, setNote] = useState("");
   const { data, refetch, isLoading, isFetching } = useBooks({
     id,
     enabled: !!id,
@@ -151,6 +73,18 @@ const EditAddBook = () => {
   };
 
   const closeModal = () => removeParams(["photo"]);
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleSave = () => {
+    setIsEditing(false);
+  };
+
+  const handleChange = (e: any) => {
+    setNote(e.target.value);
+  };
 
   const handleImages = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files!;
@@ -208,6 +142,16 @@ const EditAddBook = () => {
       );
   }, [images, token]);
 
+  const renderNote = useMemo(() => {
+    // Detect URLs in the text and convert them to clickable links
+    return (
+      <Linkify
+        text={note}
+        className="absolute inset-0 py-1 px-2 bg-transparent h-full w-full"
+      />
+    );
+  }, [note, isEditing, book?.note]);
+
   const renderModal = useMemo(() => {
     return (
       <Modal isOpen={!!photo} onClose={closeModal}>
@@ -255,6 +199,7 @@ const EditAddBook = () => {
         },
         {}
       );
+      setNote(book?.note);
       reset(initialVals);
     }
   }, [book, id]);
@@ -277,59 +222,226 @@ const EditAddBook = () => {
       )}
       <table className="bordered w-full z-10">
         <tbody>
-          {tableArr.map((item) =>
-            !item.child?.length ? (
-              <tr key={item.id} className="min-h-max h-full">
-                <th colSpan={2} className="text-xl">
-                  {inputnames[`${item.id}`]}
-                </th>
-                <td colSpan={3} className="p-0 relative h-14">
-                  <TranparentInput
-                    className="text-xl"
-                    register={register(`${item.id}`, {
-                      disabled: !token,
-                    })}
+          <tr>
+            <th rowSpan={3} className="w-[150px] text-xl">
+              1. Country
+            </th>
+            <th className="w-[200px] text-xl">1.1 Country</th>
+            <td colSpan={3} className="p-0 relative h-14 text-xl">
+              <TranparentInput
+                register={register("1_1", { disabled: !token })}
+              />
+            </td>
+          </tr>
+          <tr>
+            <th className="text-xl">1.2 Establishment/Institution</th>
+            <td className="p-0 relative h-14">
+              <TranparentInput
+                register={register("1_2", { disabled: !token })}
+              />
+            </td>
+          </tr>
+          <tr>
+            <th className="text-xl">1.3 Collection, code</th>
+            <td className="p-0 relative h-14">
+              <TranparentInput
+                register={register("1_3", { disabled: !token })}
+              />
+            </td>
+          </tr>
+
+          {/* Author */}
+          <tr>
+            <th colSpan={2} className="text-xl">
+              2. Author
+            </th>
+            <td colSpan={3} className="p-0 relative h-14">
+              <TranparentInput register={register("2", { disabled: !token })} />
+            </td>
+          </tr>
+
+          {/* Title */}
+          <tr>
+            <th rowSpan={3} className="w-[150px] text-xl">
+              3. Title
+            </th>
+            <th className="w-[200px] text-xl">3.1. Title</th>
+            <td colSpan={3} className="p-0 relative h-14 text-xl">
+              <TranparentInput
+                register={register("3_1", { disabled: !token })}
+              />
+            </td>
+          </tr>
+          <tr>
+            <th className="text-xl">3.2. Title as in manuscript</th>
+            <td className="p-0 relative h-14">
+              <TranparentInput
+                register={register("3_2", { disabled: !token })}
+              />
+            </td>
+          </tr>
+          <tr>
+            <th className="text-xl">3.3. Known also as</th>
+            <td className="p-0 relative h-14">
+              <TranparentInput
+                register={register("3_3", { disabled: !token })}
+              />
+            </td>
+          </tr>
+
+          {/* Date of Writing */}
+          <tr>
+            <th colSpan={2} className="text-xl">
+              4. Date of writing
+            </th>
+            <td colSpan={3} className="p-0 relative h-14">
+              <TranparentInput register={register("4", { disabled: !token })} />
+            </td>
+          </tr>
+
+          {/* Language */}
+          <tr>
+            <th colSpan={2} className="text-xl">
+              5. Language
+            </th>
+            <td colSpan={3} className="p-0 relative h-14">
+              <TranparentInput register={register("5", { disabled: !token })} />
+            </td>
+          </tr>
+
+          {/* Subject */}
+          <tr>
+            <th colSpan={2} className="text-xl">
+              6. Subject
+            </th>
+            <td colSpan={3} className="p-0 relative h-14">
+              <TranparentInput register={register("6", { disabled: !token })} />
+            </td>
+          </tr>
+
+          {/* Quantity of Sheets */}
+          <tr>
+            <th rowSpan={2} className="w-[150px] text-xl">
+              7. Quantity of sheets
+            </th>
+            <th className="w-[200px] text-xl">7.1. Quantity of sheets</th>
+            <td colSpan={3} className="p-0 relative h-14 text-xl">
+              <TranparentInput
+                register={register("7_1", { disabled: !token })}
+              />
+            </td>
+          </tr>
+          <tr>
+            <th className="text-xl">7.2. Available illustration</th>
+            <td className="p-0 relative h-14">
+              <TranparentInput
+                register={register("7_2", { disabled: !token })}
+              />
+            </td>
+          </tr>
+
+          {/* Copyist */}
+          <tr>
+            <th colSpan={2} className="text-xl">
+              8. Copyist
+            </th>
+            <td colSpan={3} className="p-0 relative h-14">
+              <TranparentInput register={register("8", { disabled: !token })} />
+            </td>
+          </tr>
+
+          {/* Date, Place of Copying */}
+          <tr>
+            <th rowSpan={2} className="w-[150px] text-xl">
+              9. Date, Place of Copying
+            </th>
+            <th className="w-[200px] text-xl">9.1. Date of Copying</th>
+            <td colSpan={3} className="p-0 relative h-14 text-xl">
+              <TranparentInput
+                register={register("9_1", { disabled: !token })}
+              />
+            </td>
+          </tr>
+          <tr>
+            <th className="text-xl">9.2. Place of Copying</th>
+            <td className="p-0 relative h-14">
+              <TranparentInput
+                register={register("9_2", { disabled: !token })}
+              />
+            </td>
+          </tr>
+
+          {/* Handwriting Kind */}
+          <tr>
+            <th colSpan={2} className="text-xl">
+              10. Handwriting kind
+            </th>
+            <td colSpan={3} className="p-0 relative h-14">
+              <TranparentInput
+                register={register("10", { disabled: !token })}
+              />
+            </td>
+          </tr>
+
+          {/* Defects */}
+          <tr>
+            <th colSpan={2} className="text-xl">
+              11. Defects
+            </th>
+            <td colSpan={3} className="p-0 relative h-14">
+              <TranparentInput
+                register={register("11", { disabled: !token })}
+              />
+            </td>
+          </tr>
+
+          {/* Note */}
+          <tr className="h-32">
+            <th colSpan={2} className="text-xl">
+              12. Note
+            </th>
+            {/* <td colSpan={3} className="p-0 relative h-14">
+              <textarea
+                className="absolute inset-0 py-1 px-2 bg-transparent resize-none outline-none h-full w-full"
+                {...register("12", { disabled: !token })}
+              />
+            </td> */}
+            <td colSpan={3} className="p-0 relative h-14">
+              {isEditing ? (
+                <>
+                  <textarea
+                    className="absolute inset-0 py-1 px-2 bg-transparent resize-none outline-none h-full w-full"
+                    {...register("12", { disabled: !token })}
+                    value={note}
+                    onChange={handleChange}
                   />
-                </td>
-              </tr>
-            ) : (
-              <Fragment key={item.id + "child"}>
-                <tr>
-                  <th rowSpan={item.child.length} className="w-[150px] text-xl">
-                    {inputnames[`${item.id}`]}
-                  </th>
+                  {!!token && (
+                    <button
+                      type="button"
+                      onClick={handleSave}
+                      className="absolute right-2 top-2 bg-blue-500 text-white p-2 rounded"
+                    >
+                      <img src="/assets/icons/save.svg" alt="" />
+                    </button>
+                  )}
+                </>
+              ) : (
+                <>
+                  {renderNote}
 
-                  <th className="w-[200px] text-xl">
-                    {inputnames[`${item.id}_${item.child[0].id}`]}
-                  </th>
-
-                  <td colSpan={3} className="p-0 relative h-14 text-xl">
-                    <TranparentInput
-                      register={register(`${item.id}_${item.child[0].id}`, {
-                        disabled: !token,
-                      })}
-                    />
-                  </td>
-                </tr>
-
-                {item?.child?.slice(1).map((child) => (
-                  <tr key={`${item.id}_${child.id}`}>
-                    <th className="text-xl">
-                      {inputnames[`${item.id}_${child.id}`]}
-                    </th>
-                    <td className="p-0 relative h-14">
-                      <TranparentInput
-                        className="text-xl"
-                        register={register(`${item.id}_${child.id}`, {
-                          disabled: !token,
-                        })}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </Fragment>
-            )
-          )}
+                  {!!token && (
+                    <button
+                      type="button"
+                      onClick={handleEdit}
+                      className="absolute right-2 top-2 bg-blue-500 text-white p-2 rounded"
+                    >
+                      <img src="/assets/icons/edit.svg" alt="" />
+                    </button>
+                  )}
+                </>
+              )}
+            </td>
+          </tr>
 
           {!!token && (
             <>

@@ -1,8 +1,7 @@
 import Header from "src/components/Header";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
-import { useEffect } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import DetailedSearch from "src/pages/DetailedSearch";
 import Home from "src/pages/Home";
 import Login from "src/pages/Login";
@@ -38,11 +37,11 @@ const App = () => {
             />
 
             <Routes>
-              <Route element={<MainPreview />} path={"/"} />
+              <Route element={<Home />} path={"/"} />
               {!token ? (
                 <Route path="/users" element={<UserRoutes />}>
                   <Route element={<Home />} index path={"main"} />
-                  <Route element={<Biography />} index path={"biography"} />
+                  <Route element={<Biography />} path={"biography"} />
                   <Route element={<Search />} path={"search"} />
                   <Route element={<SearchByCountry />} path={"tome-search"} />
                   <Route

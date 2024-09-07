@@ -536,7 +536,7 @@ const Biography = () => {
         </p>
       </div>
 
-      <div className="flex flex-col gap-2 flex-[2] justify-start">
+      <div className="md:flex hidden flex-col gap-2 md:flex-[2] justify-start">
         <img
           src="/assets/images/faya.png"
           alt="faya"
