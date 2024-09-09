@@ -113,7 +113,7 @@ const EditAddBook = () => {
     if (images?.length)
       return (
         <div className="flex gap-2 w-full flex-wrap mt-4">
-          {images.map((image, idx) => (
+          {images?.map((image, idx) => (
             <div className="relative h-36 w-36" key={image + idx}>
               {!!token && (
                 <div
@@ -400,12 +400,6 @@ const EditAddBook = () => {
             <th colSpan={2} className="text-xl">
               12. Note
             </th>
-            {/* <td colSpan={3} className="p-0 relative h-14">
-              <textarea
-                className="absolute inset-0 py-1 px-2 bg-transparent resize-none outline-none h-full w-full"
-                {...register("12", { disabled: !token })}
-              />
-            </td> */}
             <td colSpan={3} className="p-0 relative h-14">
               {isEditing ? (
                 <>
