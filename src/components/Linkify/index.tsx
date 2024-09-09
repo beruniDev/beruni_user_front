@@ -13,8 +13,8 @@ const Linkify: React.FC<LinkifyProps> = ({ text, className }) => {
 
   return (
     <p className={className}>
-      {parts.map((part, index) =>
-        urlRegex.test(part) ? (
+      {parts?.map((part, index) =>
+        urlRegex?.test(part) ? (
           <a
             className="text-blue-400"
             key={index}
