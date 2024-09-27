@@ -24,7 +24,7 @@ const TranparentInput: FC<Props> = ({
   return (
     <input
       className={cl(
-        "absolute inset-0 py-1 px-2 bg-transparent resize-none outline-none h-full w-full",
+        "absolute inset-0 py-1 px-2 text-sm bg-transparent resize-none outline-none h-full w-full",
         className
       )}
       placeholder={placeholder || ""}
