@@ -12,10 +12,11 @@ import { tokenSelector } from "./store/reducers/auth";
 import EditAddBook from "./pages/EditAddBook";
 import BookList from "./pages/List";
 import PrintComponent from "./components/PrintComponent";
-import MainPreview from "./pages/Main";
 import UserRoutes from "./components/UserRoutes";
 import AdminRoutes from "./components/AdminRoutes";
 import Biography from "./pages/Biography";
+import AddHugeText from "./pages/EditAddTelegraph";
+import ShowTelegraph from "./pages/ShowTelegraph";
 
 const App = () => {
   const token = useAppSelector(tokenSelector);
@@ -48,6 +49,7 @@ const App = () => {
                     element={<DetailedSearch />}
                     path={"detailed-search"}
                   />
+                  <Route element={<ShowTelegraph />} path={"telegraph"} />
                   <Route element={<Login />} path={"login"} />
                 </Route>
               ) : (
@@ -56,6 +58,7 @@ const App = () => {
                   <Route element={<EditAddBook />} path={"add"} />
                   <Route element={<Search />} path={"search"} />
                   <Route element={<DetailedSearch />} path={"filter"} />
+                  <Route element={<AddHugeText />} path={"edit-telegraph"} />
                 </Route>
               )}
               <Route element={<EditAddBook />} path={"/list/:id"} />

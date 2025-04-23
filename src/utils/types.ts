@@ -85,3 +85,18 @@ export interface BookType {
 export interface BookTypes extends BasePaginatedRes {
   items: BookType[];
 }
+
+export interface TelegraphBody {
+  body: string;
+  name?: string;
+  status?: number;
+  id?: number;
+}
+
+export interface TelegraphRes {
+  body: string;
+  name: string;
+  id: number;
+  created_at: string;
+  status: number;
+}

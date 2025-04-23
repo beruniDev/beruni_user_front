@@ -4,7 +4,6 @@ import baseApi from "src/api/baseApi";
 const filesMutation = () => {
   const contentType = "multipart/form-data";
 
-  const config = { timeout: 1000000 };
   return useMutation({
     mutationKey: ["image_upload"],
     mutationFn: async (body: any) => {
