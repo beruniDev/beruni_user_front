@@ -3,7 +3,7 @@ import ReactQuill from "react-quill";
 import DOMPurify from "dompurify";
 import "react-quill/dist/quill.snow.css";
 import Button from "../Button";
-import { editTelegraph } from "src/hooks/useTelegraph";
+import { editTelegraph, getTelegraph } from "src/hooks/useTelegraph";
 import { errorToast, successToast } from "src/utils/toast";
 import Loading from "../Loader";
 
@@ -14,6 +14,7 @@ interface Props {
 const RichTextEditorWithDynamicIDs: React.FC<Props> = ({ defaultValue }) => {
   const [content, setContent] = useState<string>(defaultValue);
   const [processedContent, setProcessedContent] = useState<string>("");
+  const { refetch } = getTelegraph({ id: 1, enabled: false });
 
   const { mutate, isPending } = editTelegraph();
 
@@ -23,6 +24,7 @@ const RichTextEditorWithDynamicIDs: React.FC<Props> = ({ defaultValue }) => {
       {
         onSuccess: () => {
           successToast("success");
+          refetch();
         },
         onError: (e) => errorToast(e.message),
       }
