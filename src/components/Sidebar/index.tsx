@@ -33,10 +33,10 @@ const routes = [
     name: "List",
     url: "/list",
   },
-  {
-    name: "Telegraph",
-    url: "/users/telegraph",
-  },
+  // {
+  //   name: "Telegraph",
+  //   url: "/users/telegraph",
+  // },
 ];
 
 const adminRoutes = [
@@ -56,10 +56,10 @@ const adminRoutes = [
     name: "List",
     url: "/list",
   },
-  {
-    name: "Edit Telegraph",
-    url: "/admin/edit-telegraph",
-  },
+  // {
+  //   name: "Edit Telegraph",
+  //   url: "/admin/edit-telegraph",
+  // },
 ];
 
 const Sidebar = () => {
